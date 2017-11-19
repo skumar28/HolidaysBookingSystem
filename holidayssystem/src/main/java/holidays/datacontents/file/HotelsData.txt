@@ -1,0 +1,2 @@
+1#TestHotel#This is test hotel #Buffalo#USA#12 PM #11 AM #Room Delux #Breakfast Included #100
+2#Taj Hotel#Best Hotel in Town #Buffalo#USA#12 PM #11 AM #Room Delux #Breakfast Included #80		

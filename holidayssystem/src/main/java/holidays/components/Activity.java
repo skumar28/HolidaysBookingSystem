@@ -5,7 +5,8 @@ public class Activity {
 	private String name;
 	private String description;
 	private String duration;
-
+	private double price;
+	
 	public int getId() {
 		return id;
 	}
@@ -36,6 +37,14 @@ public class Activity {
 
 	public void setDuration(String duration) {
 		this.duration = duration;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 }

@@ -9,7 +9,8 @@ public class Hotel {
 	private String country;
 	private String checkinTime;
 	private String checkoutTime;
-
+	private double price;
+		
 	public int getId() {
 		return id;
 	}
@@ -73,4 +74,12 @@ public class Hotel {
 	public void setCheckoutTime(String checkoutTime) {
 		this.checkoutTime = checkoutTime;
 	}
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
 }
