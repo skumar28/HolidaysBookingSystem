@@ -10,9 +10,8 @@ public class Testlogin {
 		try 
 		{
 				// TODO Auto-generated method stub
-				Login l= new Login();
-				FileReader fr= new FileReader("/Users/akshaychopra/Documents/HolidaysBookingSystem/holidayssystem/src/main/java/LoginData/logindata.txt");			
-				BufferedReader in = new BufferedReader(new FileReader("/Users/akshaychopra/Documents/HolidaysBookingSystem/holidayssystem/src/main/java/LoginData/logindata.txt"));
+				Login login= new Login();
+				
 				String sUsername;
 				String sPassword;
 				
@@ -23,7 +22,7 @@ public class Testlogin {
 				int choice;
 				Boolean check;
 				
-				l.readFile(in,hm);
+				
 				do{
 						//display our menu
 						System.out.println("\t\t\t*****Holiday Package Managment System*****\t\t\t");
@@ -48,7 +47,8 @@ public class Testlogin {
 									    System.out.println("Enter Passowrd");
 									    sPassword= userInput.next();
 									    
-									    check=l.checkvalid(sUsername,sPassword, hm);
+									   
+									    check=login.checkvalid(sUsername,sPassword);
 									    if(check== false)
 									    {
 									    	 System.out.println("Invalid Username or Password");									    	
@@ -68,7 +68,8 @@ public class Testlogin {
 									    System.out.println("Enter Password");
 									    sPassword=userInput.next();
 									    
-									    check=l.newuser(sUsername,sPassword,hm);
+									    
+									    check=login.newuser(sUsername,sPassword);
 									    if(check==false)
 									    {
 									    	 System.out.println("Username already in use!\nTry a new Username");
