@@ -4,6 +4,7 @@ public class Transport {
 	private int id;
 	private String name;
 	private String description;
+	private String transportDate;
 	private double price;
 
 	public int getId() {
@@ -28,6 +29,14 @@ public class Transport {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getTransportDate() {
+		return transportDate;
+	}
+
+	public void setTransportDate(String transportDate) {
+		this.transportDate = transportDate;
 	}
 
 	public double getPrice() {

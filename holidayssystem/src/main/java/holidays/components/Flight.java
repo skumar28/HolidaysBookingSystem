@@ -8,6 +8,7 @@ public class Flight {
 	private String toCity;
 	private String startTime;
 	private String endTime;
+	private String flightDate;
 	private double price;
 
 	public int getId() {
@@ -68,6 +69,14 @@ public class Flight {
 
 	public double getPrice() {
 		return price;
+	}
+
+	public String getFlightDate() {
+		return flightDate;
+	}
+
+	public void setFlightDate(String flightDate) {
+		this.flightDate = flightDate;
 	}
 
 	public void setPrice(double price) {

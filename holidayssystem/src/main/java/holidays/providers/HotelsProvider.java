@@ -3,10 +3,23 @@ package holidays.providers;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import holidays.components.Hotel;
+import holidays.components.Room;
 
 public class HotelsProvider {
 
-	public static void main(String args[]) {
+	Map<Integer, Hotel> hotelDataMap = new HashMap<>();
+	public HotelsProvider() {
+		loadHotelData();
+	}
+	
+	private void loadHotelData() {
+		// TODO Auto-generated method stub
 		try {
 			File hotelData = new File(
 					"D:\\Fall_2017\\CSE522_OOD\\project\\HolidaysBookingSystem\\holidayssystem\\src\\main\\java\\holidays\\datacontents\\file\\HotelsData.txt");
@@ -15,11 +28,44 @@ public class HotelsProvider {
 			String line = "";
 
 			while ((line = bufReader.readLine()) != null) {
-				System.out.println(line);
+				Hotel hotel = populateHotel(line);
+				
+				hotelDataMap.put(hotel.getId(), hotel);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	////1#TestHotel#This is test hotel #Buffalo#USA#12 PM #11 AM #Room Delux #Breakfast Included #100
+	private Hotel populateHotel(String line) {
+		String hoteldetails[] = line.split("#");
+		
+		Hotel hotel = new Hotel();
+		Room room = new Room();
+		hotel.setId(Integer.parseInt(hoteldetails[0]));
+		hotel.setName(hoteldetails[1]);
+		hotel.setDescription(hoteldetails[2]);
+		hotel.setCityName(hoteldetails[3]);
+		hotel.setCountry(hoteldetails[4]);
+		hotel.setCheckinTime(hoteldetails[5]);
+		hotel.setCheckoutTime(hoteldetails[6]);
+		room.setCategory(hoteldetails[7]);
+		room.setDescription(hoteldetails[8]);
+		hotel.setRoomInfo(room);
+		hotel.setPrice(Double.parseDouble(hoteldetails[9]));		
+		
+		return hotel;
+	}
+
+	public List<Hotel> hotelsByIds(String ids){
+		List<Hotel> hotelList = new ArrayList<>();
+		String id[] = ids.split(","); 
+		
+		for(String strId : id) {
+			hotelList.add(hotelDataMap.get(Integer.parseInt(strId)));
+		}
+		return hotelList;
 	}
 }

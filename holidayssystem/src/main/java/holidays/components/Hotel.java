@@ -9,6 +9,8 @@ public class Hotel {
 	private String country;
 	private String checkinTime;
 	private String checkoutTime;
+	private String checkinDate;
+	private String checkoutDate;
 	private double price;
 		
 	public int getId() {
@@ -81,5 +83,20 @@ public class Hotel {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
+
+	public String getCheckinDate() {
+		return checkinDate;
+	}
+
+	public void setCheckinDate(String checkinDate) {
+		this.checkinDate = checkinDate;
+	}
+
+	public String getCheckoutDate() {
+		return checkoutDate;
+	}
+
+	public void setCheckoutDate(String checkoutDate) {
+		this.checkoutDate = checkoutDate;
+	}	
 }
