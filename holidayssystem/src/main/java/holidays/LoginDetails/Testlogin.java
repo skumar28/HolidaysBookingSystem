@@ -92,7 +92,7 @@ public class Testlogin {
 						}
 						
 				}while(choice != 3);
-				//fr.close();
+				
 			
 		
 		}
