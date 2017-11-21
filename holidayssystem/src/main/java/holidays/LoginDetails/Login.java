@@ -16,11 +16,9 @@ public class Login {
 	Login()
 	{	
 		
-		
 		sUsername="";
 		sPassword="";
 		loaddata();
-		
 		
 	}
 		
@@ -73,13 +71,27 @@ public class Login {
 					String parts[] = sLine.split("#");
 		            hr.put(parts[0], parts[1]);
 				}
-				in.close();
+				//in.close();
 		        System.out.println(hr.toString());
 		}
 		
 		catch(Exception ex)
 		{
 			System.out.println(ex.getMessage());
+		}
+		
+		finally
+		{
+			try
+			{
+			   in.close();	
+			}
+			
+			catch(IOException e)
+			{
+				System.out.println(e.getMessage());
+			}
+					
 		}
 		
 	}
@@ -118,8 +130,9 @@ public class Login {
 			}
 			else
 			{				
-				hr.put(Username, Password);				
-				out.write(Username);
+				hr.put(Username, Password);
+				out.newLine();
+				out.write(Username+"#"+Password);
 				System.out.println(hr.toString());
 				return true;
 			}
@@ -129,6 +142,17 @@ public class Login {
 		{
 			System.out.println(ex.getMessage());
 			return false;
+		}
+		finally
+		{
+			try
+			{
+				out.close();
+			}
+			catch(IOException e)
+			{
+				System.out.println(e.getMessage());
+			}
 		}
 	}
 	
