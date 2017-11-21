@@ -8,12 +8,39 @@ public class Login {
 	private String sUsername;
 	private String sPassword;
 	
+	private BufferedReader in;
+	private BufferedWriter out;
+	HashMap<String, String> hr = new HashMap<String, String>();
+	
+	
 	Login()
-	{
+	{	
+		
+		
 		sUsername="";
 		sPassword="";
+		loaddata();
+		
+		
 	}
-	
+		
+    private void loaddata()
+    {
+    	  try
+    	  {
+    		  in = new BufferedReader(new FileReader("/Users/akshaychopra/Documents/HolidaysBookingSystem/holidayssystem/src/main/java/LoginData/logindata.txt"));
+    		  out= new BufferedWriter(new FileWriter("/Users/akshaychopra/Documents/HolidaysBookingSystem/holidayssystem/src/main/java/LoginData/logindata.txt",true));
+    		  readFile();
+    	  }
+    	  
+    	  catch(Exception ex)
+    	  {
+    		  System.out.println(ex.getMessage());
+    	  }
+    	  
+    	  
+    	  
+    }	
 	public String getUsername()
 	{
 		return this.sUsername;
@@ -35,7 +62,8 @@ public class Login {
 		this.sPassword=password;
 	}
 	
-	public void readFile(BufferedReader in, HashMap<String, String> hr)
+	
+	public void readFile()
 	{
 		String sLine="";
 		try
@@ -57,7 +85,8 @@ public class Login {
 	}
 	
 	
-	public Boolean checkvalid(String Username, String Password, HashMap<String, String> hr )
+	
+	public Boolean checkvalid(String Username, String Password)
 	{
 		try
 		{
@@ -77,7 +106,8 @@ public class Login {
 	}
 	
 	
-	public Boolean newuser(String Username, String Password, HashMap<String, String> hr )
+	
+	public Boolean newuser(String Username, String Password)
 	{
 		try
 		{
@@ -87,8 +117,9 @@ public class Login {
 				return false;
 			}
 			else
-			{
-				hr.put(Username, Password);
+			{				
+				hr.put(Username, Password);				
+				out.write(Username);
 				System.out.println(hr.toString());
 				return true;
 			}
