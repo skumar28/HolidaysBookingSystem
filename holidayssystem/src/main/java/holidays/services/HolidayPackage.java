@@ -7,8 +7,7 @@ public class HolidayPackage {
 	private String name;
 	private String description;
 	private PackageType type;
-	private String startDate;
-	private String endDate;
+	private String duration;
 	private String fromCity;
 	private double totalPrice;
 	private String imgsrc;
@@ -16,7 +15,7 @@ public class HolidayPackage {
 	private List<String> flights;
 	private List<String> activities;
 	private List<String> transport;
-	
+
 	public int getId() {
 		return id;
 	}
@@ -49,20 +48,12 @@ public class HolidayPackage {
 		this.type = type;
 	}
 
-	public String getStartDate() {
-		return startDate;
+	public String getDuration() {
+		return duration;
 	}
 
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
-	}
-
-	public String getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
+	public void setDuration(String duration) {
+		this.duration = duration;
 	}
 
 	public String getFromCity() {
