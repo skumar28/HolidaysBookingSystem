@@ -2,21 +2,25 @@ package holidays.services;
 
 import java.util.List;
 
+import holidays.components.Activity;
+import holidays.components.Flight;
+import holidays.components.Hotel;
+import holidays.components.Transport;
+
 public class HolidayPackage {
 	private int id;
 	private String name;
 	private String description;
 	private PackageType type;
-	private String startDate;
-	private String endDate;
+	private String duration;
 	private String fromCity;
 	private double totalPrice;
 	private String imgsrc;
-	private List<String> hotels;
-	private List<String> flights;
-	private List<String> activities;
-	private List<String> transport;
-	
+	private List<Hotel> hotels;
+	private List<Flight> flights;
+	private List<Activity> activities;
+	private List<Transport> transport;
+
 	public int getId() {
 		return id;
 	}
@@ -49,20 +53,12 @@ public class HolidayPackage {
 		this.type = type;
 	}
 
-	public String getStartDate() {
-		return startDate;
+	public String getDuration() {
+		return duration;
 	}
 
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
-	}
-
-	public String getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
+	public void setDuration(String duration) {
+		this.duration = duration;
 	}
 
 	public String getFromCity() {
@@ -81,35 +77,35 @@ public class HolidayPackage {
 		this.totalPrice = totalPrice;
 	}
 
-	public List<String> getHotels() {
+	public List<Hotel> getHotels() {
 		return hotels;
 	}
 
-	public void setHotels(List<String> hotels) {
+	public void setHotels(List<Hotel> hotels) {
 		this.hotels = hotels;
 	}
 
-	public List<String> getFlights() {
+	public List<Flight> getFlights() {
 		return flights;
 	}
 
-	public void setFlights(List<String> flights) {
+	public void setFlights(List<Flight> flights) {
 		this.flights = flights;
 	}
 
-	public List<String> getActivities() {
+	public List<Activity> getActivities() {
 		return activities;
 	}
 
-	public void setActivities(List<String> activities) {
+	public void setActivities(List<Activity> activities) {
 		this.activities = activities;
 	}
 
-	public List<String> getTransport() {
+	public List<Transport> getTransport() {
 		return transport;
 	}
 
-	public void setTransport(List<String> transport) {
+	public void setTransport(List<Transport> transport) {
 		this.transport = transport;
 	}
 

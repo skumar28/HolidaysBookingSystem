@@ -1,0 +1,4 @@
+1#Best of Western New York#This is value for money package#1#4 Days 3 Nights#Buffalo#noImage#1,2#2,3#1,2#1
+2#Best of New York City#This is value for money package#2#4 Days 3 Nights#New York City#noImage#1,2#2,3#1,2#1
+3#Best of LosAngeles#This is value for money package#3#4 Days 3 Nights#LosAngeles#noImage#1,2#2,3#1,2#1
+4#Best of Arizona#This is value for money package#1#4 Days 3 Nights#Arizona#noImage#1,2#2,3#1,2#1
