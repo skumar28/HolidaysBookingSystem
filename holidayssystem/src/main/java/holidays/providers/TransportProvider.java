@@ -22,7 +22,7 @@ public class TransportProvider {
 		// TODO Auto-generated method stub
 		try {
 			File transportData = new File(
-					"D:\\Fall_2017\\CSE522_OOD\\project\\HolidaysBookingSystem\\holidayssystem\\src\\main\\java\\holidays\\datacontents\\file\\ActivityData.txt");
+					"/Users/akshaychopra/Documents/HolidaysBookingSystem/holidayssystem/src/main/java/holidays/datacontents/file/TransportData.txt");
 			FileReader fileReader = new FileReader(transportData);
 			BufferedReader bufReader = new BufferedReader(fileReader);
 			String line = "";
@@ -46,7 +46,7 @@ public class TransportProvider {
 		transport.setId(Integer.parseInt(transportdetails[0]));
 		transport.setName(transportdetails[1]);
 		transport.setDescription(transportdetails[2]);
-		transport.setPrice(Double.parseDouble(transportdetails[4]));
+		transport.setPrice(Double.parseDouble(transportdetails[3]));
 
 		return transport;
 	}

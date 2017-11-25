@@ -22,7 +22,7 @@ public class HotelsProvider {
 		// TODO Auto-generated method stub
 		try {
 			File hotelData = new File(
-					"D:\\Fall_2017\\CSE522_OOD\\project\\HolidaysBookingSystem\\holidayssystem\\src\\main\\java\\holidays\\datacontents\\file\\HotelsData.txt");
+					"/Users/akshaychopra/Documents/HolidaysBookingSystem/holidayssystem/src/main/java/holidays/datacontents/file/HotelsData.txt");
 			FileReader fileReader = new FileReader(hotelData);
 			BufferedReader bufReader = new BufferedReader(fileReader);
 			String line = "";
