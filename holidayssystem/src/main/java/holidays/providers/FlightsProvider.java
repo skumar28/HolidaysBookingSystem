@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.java.contract.Requires;
+
 import holidays.components.Flight;
 
 
@@ -55,7 +57,7 @@ public class FlightsProvider {
 		
 		return flight;
 	}
-
+	@Requires("ids.length() > 0")
 	public List<Flight> flightsByIds(String ids){
 		List<Flight> flightList = new ArrayList<>();
 		String id[] = ids.split(","); 

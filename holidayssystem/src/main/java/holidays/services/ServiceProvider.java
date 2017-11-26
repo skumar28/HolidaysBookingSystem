@@ -94,8 +94,6 @@ public class ServiceProvider {
 			}
 		}
 		
-		
-
 		return packageList;
 	}
 
@@ -115,42 +113,64 @@ public class ServiceProvider {
 			flightList=hp.getFlights();
 			transportList=hp.getTransport();
 			
-			
-			System.out.println("Pacakge ID :"+hp.getId());
-			System.out.println("Name :"+hp.getName());
+			System.out.println("**************************************************************");
+			System.out.println("ID :"+hp.getId() + "   Package Name: " + hp.getName());
+			System.out.println("**************************************************************");		
 			System.out.println("Description :"+hp.getDescription());
 			System.out.println("Type :"+hp.getType());
 			System.out.println("Duration :"+hp.getDuration());
-			System.out.println("City :"+hp.getFromCity());
-			System.out.print("Hotel :\t");
-			for(int i=0;i<hotelList.size();i++)
-				System.out.print(hotelList.get(i).getName()+" ");
+			System.out.println("From City :"+hp.getFromCity());
+			
+			if(!flightList.isEmpty()) {
+				System.out.println("-----------------");
+				System.out.println("Flight Details");
+				System.out.println("-----------------");
+				for(Flight flight : flightList) {
+					System.out.println("Flight Name: " + flight.getCarrierName()+", " + flight.getFlightName());	
+					System.out.println("Departure Airport: "+ flight.getFromCity() + "        Time: "+ flight.getStartTime());
+					System.out.println("Arrival Airport: " + flight.getToCity() + "       Time: "+ flight.getEndTime());
+					
+					System.out.println();
+				}	
+			}			
+			
+			if(!hotelList.isEmpty()) {
+				System.out.println("---------------");
+				System.out.println("Hotel Details");
+				System.out.println("---------------");			
+				for(Hotel htl : hotelList) {
+					System.out.println("Hotel Name: " + htl.getName() + "    City:" + htl.getCityName());
+					System.out.println("Description: " + htl.getDescription());
+					System.out.println("Checkin Time: "+ htl.getCheckinTime() + "      Checkout Time: " + htl.getCheckoutTime());
+					System.out.println("Room: " + htl.getRoomInfo().getCategory() + "     Meal :" + htl.getRoomInfo().getDescription());
+					System.out.println();
+				}	
+			}			
+			
+			if(!activityList.isEmpty()) {
+				System.out.println("-------------------");			
+				System.out.println("Activities Details");
+				System.out.println("-------------------");
+				for(Activity act : activityList) {
+					System.out.println("Activity Name: "+ act.getName() + "     Duration: "+ act.getDuration());
+					System.out.println("Description: "+ act.getDescription());
+					System.out.println();
+				}	
+			}			
+			
+			if(!transportList.isEmpty()) {
+				System.out.println("------------------");			
+				System.out.println("Transport Details");
+				System.out.println("------------------");	
+				for(Transport trp : transportList) {
+					System.out.println("Transport Name: "+ trp.getName());
+					System.out.println("Description: " + trp.getDescription());
+				}					
+			}			
 			
 			System.out.println();
-			
-			System.out.print("Activities :");
-			for(int i=0;i<activityList.size();i++)
-				System.out.print(activityList.get(i).getName()+", ");
-			
 			System.out.println();
-			
-			System.out.print("Flight :");
-			for(int i=0;i<flightList.size();i++)
-				System.out.print(flightList.get(i).getCarrierName()+", ");
-			
-			
-			System.out.println();
-			
-			System.out.print("Transport :");
-			for(int i=0;i<transportList.size();i++)
-				System.out.print(transportList.get(i).getName()+", ");
-			
-			
-			System.out.println();
-			System.out.println();
-		}
-		
-			
+		}		
 	}
 
 	public HolidayPackage selectPackage(String id) {

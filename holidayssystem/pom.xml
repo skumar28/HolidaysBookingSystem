@@ -32,5 +32,13 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.java.contract/cofoja -->
+		<dependency>
+			<groupId>com.google.java.contract</groupId>
+			<artifactId>cofoja.contracts.asm</artifactId>
+			<version>1.3-20160207</version>
+		</dependency>
+
 	</dependencies>
+
 </project>
