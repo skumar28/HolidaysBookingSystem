@@ -1,159 +1,92 @@
 package holidays.LoginDetails;
 
 import java.util.*;
+
+import holidays.customer.LoginInfo;
+
 import java.io.*;
 
 public class Login {
-	
-	private String sUsername;
-	private String sPassword;
-	
-	private BufferedReader in;
-	private BufferedWriter out;
-	HashMap<String, String> hr = new HashMap<String, String>();
-	
-	
-	Login()
-	{	
-		
-		sUsername="";
-		sPassword="";
+
+	private BufferedReader readFile;
+	HashMap<String, String> loginData = new HashMap<String, String>();
+
+	public Login() {
 		loaddata();
-		
 	}
-		
-    private void loaddata()
-    {
-    	  try
-    	  {
-    		  in = new BufferedReader(new FileReader("/Users/akshaychopra/Documents/HolidaysBookingSystem/holidayssystem/src/main/java/LoginData/logindata.txt"));
-    		  out= new BufferedWriter(new FileWriter("/Users/akshaychopra/Documents/HolidaysBookingSystem/holidayssystem/src/main/java/LoginData/logindata.txt",true));
-    		  readFile();
-    	  }
-    	  
-    	  catch(Exception ex)
-    	  {
-    		  System.out.println(ex.getMessage());
-    	  }
-    	  
-    	  
-    	  
-    }	
-	public String getUsername()
-	{
-		return this.sUsername;
-	}
-	
-	
-	public String getPassword()
-	{
-		return this.sPassword;
-	}
-	
-	public void setUsername(String username)
-	{
-		this.sUsername= username;
-	}
-	
-	public void setPassword(String password)
-	{
-		this.sPassword=password;
-	}
-	
-	
-	public void readFile()
-	{
-		String sLine="";
-		try
-		{
-				while((sLine = in.readLine()) != null)
-				{
+
+	private void loaddata() {
+		try {
+			readFile = new BufferedReader(new FileReader("src/main/java/holidays/datacontents/file/logindata.txt"));
+
+			String sLine = "";
+			try {
+				while ((sLine = readFile.readLine()) != null) {
 					String parts[] = sLine.split("#");
-		            hr.put(parts[0], parts[1]);
+					loginData.put(parts[0], parts[1]);
 				}
-				//in.close();
-		        System.out.println(hr.toString());
+				// in.close();
+				System.out.println(loginData.toString());
+			}
+
+			catch (Exception ex) {
+				System.out.println(ex.getMessage());
+			}
+
+			finally {
+				try {
+					readFile.close();
+				}
+				catch (IOException e) {
+					System.out.println(e.getMessage());
+				}
+			}
 		}
-		
-		catch(Exception ex)
-		{
+
+		catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		}
-		
-		finally
-		{
-			try
-			{
-			   in.close();	
-			}
-			
-			catch(IOException e)
-			{
-				System.out.println(e.getMessage());
-			}
-					
-		}
-		
 	}
-	
-	
-	
-	public Boolean checkvalid(String Username, String Password)
-	{
-		try
-		{
+
+	public Boolean validateUser(LoginInfo userInfo) {
+		try {
 			String value;
-			value=(String)hr.get(Username);
-			if(value.equals(Password))	
+			value = (String) loginData.get(userInfo.getUserName());
+			if (value.equals(userInfo.getPassword()))
 				return true;
 			else
 				return false;
-		}
-		catch(Exception ex)
-		{
+		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 			return false;
 		}
-			
+
 	}
-	
-	
-	
-	public Boolean newuser(String Username, String Password)
-	{
-		try
-		{
-			
-			if(hr.containsKey(Username))
-			{
+
+	public Boolean registerNewUser(LoginInfo userInfo) {
+		BufferedWriter writeFile = null;
+		try {
+			writeFile = new BufferedWriter(new FileWriter("src/main/java/holidays/datacontents/file/logindata.txt", true));
+			if (loginData.containsKey(userInfo.getUserName())) {
 				return false;
-			}
-			else
-			{				
-				hr.put(Username, Password);
-				out.newLine();
-				out.write(Username+"#"+Password);
-				System.out.println(hr.toString());
+			} else {
+				loginData.put(userInfo.getUserName(), userInfo.getPassword());
+				writeFile.newLine();
+				writeFile.write(userInfo.getUserName() + "#" + userInfo.getPassword());
+				/*System.out.println(loginData.toString());*/
 				return true;
 			}
-				
-		}
-		catch(Exception ex)
-		{
+
+		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 			return false;
-		}
-		finally
-		{
-			try
-			{
-				out.close();
-			}
-			catch(IOException e)
-			{
+		} finally {
+			try {
+				writeFile.close();
+			} catch (IOException e) {
 				System.out.println(e.getMessage());
 			}
 		}
 	}
-	
+
 }
