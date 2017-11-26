@@ -11,6 +11,7 @@ import java.util.Map;
 import com.google.java.contract.Requires;
 
 import holidays.components.Flight;
+import holidays.components.Hotel;
 
 
 public class FlightsProvider {
@@ -63,7 +64,10 @@ public class FlightsProvider {
 		String id[] = ids.split(","); 
 		
 		for(String strId : id) {
-			flightList.add(flightDataMap.get(Integer.parseInt(strId)));
+			
+			Flight flight = flightDataMap.get(Integer.parseInt(strId));
+			if (flight != null)
+				flightList.add(flight);
 		}
 		return flightList;
 	}

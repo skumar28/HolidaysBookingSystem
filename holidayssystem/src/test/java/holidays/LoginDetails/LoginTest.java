@@ -1,12 +1,47 @@
 package holidays.LoginDetails;
 
-import java.util.HashMap;
+import java.util.Random;
+import java.util.List;
 import java.util.Scanner;
 
+
 import holidays.customer.LoginInfo;
+import holidays.providers.HotelsProvider;
+import junit.framework.Assert;
 import junit.framework.TestCase;
 
-public class LoginTest {
+public class LoginTest extends TestCase {
+	
+	Login login;
+	LoginInfo userInfo1, userInfo2;
+	Random rand;
+	
+	//HotelsProvider hotelProvider;
+	
+	public void setUp() {
+		userInfo1 = new LoginInfo();
+		userInfo2= new LoginInfo();
+		rand= new Random();
+		login= new Login();
+		
+		userInfo1.setUserName("achopra6");
+		userInfo1.setPassword("1234");
+		userInfo2.setUserName("pqrst"+rand.nextInt(1000));
+		userInfo2.setPassword("123");
+	}
+	
+	
+	public void testLoginInfoFound()
+    {			
+		assertTrue(login.validateUser(userInfo1));
+    }
+	
+	public void testRegisterLoginInfo()
+    {			
+		assertTrue(login.registerNewUser(userInfo2));
+    }
+	
+	
 
 	public static void main(String[] args) {
 
@@ -14,8 +49,6 @@ public class LoginTest {
 			// TODO Auto-generated method stub
 			Login login = new Login();
 			LoginInfo userInfo = new LoginInfo();
-
-			HashMap<String, String> hm = new HashMap<String, String>();
 
 			Scanner userInput = new Scanner(System.in);
 			int choice;

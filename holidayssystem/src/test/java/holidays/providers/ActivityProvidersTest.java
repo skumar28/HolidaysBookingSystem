@@ -6,18 +6,24 @@ import holidays.components.Activity;
 import junit.framework.TestCase;
 
 public class ActivityProvidersTest extends TestCase {
+	
+	ActivityProviders activityProvider;
+	
+	public void setUp() {
+		activityProvider = new ActivityProviders();
+	}
+
 	public void testActivityProvider()
-    {
-        assertTrue( true );
+    {	
+		List<Activity> activityList = activityProvider.activityByIds("1");
+		
+		assertEquals(1, activityList.size());
     }
 	
-	public static void main(String args[]) {
-		ActivityProviders activityProvider = new ActivityProviders();
-	
-		List<Activity> activityList = activityProvider.activityByIds("1");
-		for(Activity act : activityList) {
-			System.out.println(act.getName());
-		}
-		
+	public void testNoActivityFound() {
+		List<Activity> activityList = activityProvider.activityByIds("100");
+		assertTrue(activityList.isEmpty());
 	}
+	
+	
 }

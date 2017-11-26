@@ -15,9 +15,9 @@ public class HotelsProviderTest extends TestCase {
 
 	public void testHotelsProvider()
     {	
-		List<Hotel> hotelList = hotelProvider.hotelsByIds("1,2,3");
+		List<Hotel> hotelList = hotelProvider.hotelsByIds("1");
 		
-		assertEquals(3, hotelList.size());
+		assertEquals(1, hotelList.size());
     }
 	
 	public void testNoHotelFound() {
@@ -25,13 +25,5 @@ public class HotelsProviderTest extends TestCase {
 		assertTrue(hotelList.isEmpty());
 	}
 	
-	public static void main(String args[]) {
-		HotelsProvider hotelProvider = new HotelsProvider();
 	
-		List<Hotel> hotelList = hotelProvider.hotelsByIds("1,2,3");
-		for(Hotel htl : hotelList) {
-			System.out.println(htl.getName());
-		}
-		
-	}
 }
