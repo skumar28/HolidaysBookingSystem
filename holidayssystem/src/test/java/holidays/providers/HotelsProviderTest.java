@@ -6,19 +6,24 @@ import holidays.components.Hotel;
 import junit.framework.TestCase;
 
 public class HotelsProviderTest extends TestCase {
+	
+	HotelsProvider hotelProvider;
+	
+	public void setUp() {
+		hotelProvider = new HotelsProvider();
+	}
 
 	public void testHotelsProvider()
-    {
-        assertTrue( true );
+    {	
+		List<Hotel> hotelList = hotelProvider.hotelsByIds("1");
+		
+		assertEquals(1, hotelList.size());
     }
 	
-	public static void main(String args[]) {
-		HotelsProvider hotelProvider = new HotelsProvider();
-	
-		List<Hotel> hotelList = hotelProvider.hotelsByIds("1,2,3");
-		for(Hotel htl : hotelList) {
-			System.out.println(htl.getName());
-		}
-		
+	public void testNoHotelFound() {
+		List<Hotel> hotelList = hotelProvider.hotelsByIds("100");
+		assertTrue(hotelList.isEmpty());
 	}
+	
+	
 }
