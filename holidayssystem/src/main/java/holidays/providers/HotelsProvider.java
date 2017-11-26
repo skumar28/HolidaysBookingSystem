@@ -14,22 +14,22 @@ import holidays.components.Room;
 public class HotelsProvider {
 
 	Map<Integer, Hotel> hotelDataMap = new HashMap<>();
+
 	public HotelsProvider() {
 		loadHotelData();
 	}
-	
+
 	private void loadHotelData() {
 		// TODO Auto-generated method stub
 		try {
-			File hotelData = new File(
-					"src/main/java/holidays/datacontents/file/HotelsData.txt");
+			File hotelData = new File("src/main/java/holidays/datacontents/file/HotelsData.txt");
 			FileReader fileReader = new FileReader(hotelData);
 			BufferedReader bufReader = new BufferedReader(fileReader);
 			String line = "";
 
 			while ((line = bufReader.readLine()) != null) {
 				Hotel hotel = populateHotel(line);
-				
+
 				hotelDataMap.put(hotel.getId(), hotel);
 			}
 		} catch (Exception e) {
@@ -38,10 +38,11 @@ public class HotelsProvider {
 		}
 	}
 
-	////1#TestHotel#This is test hotel #Buffalo#USA#12 PM #11 AM #Room Delux #Breakfast Included #100
+	//// 1#TestHotel#This is test hotel #Buffalo#USA#12 PM #11 AM #Room Delux
+	//// #Breakfast Included #100
 	private Hotel populateHotel(String line) {
 		String hoteldetails[] = line.split("#");
-		
+
 		Hotel hotel = new Hotel();
 		Room room = new Room();
 		hotel.setId(Integer.parseInt(hoteldetails[0]));
@@ -54,17 +55,19 @@ public class HotelsProvider {
 		room.setCategory(hoteldetails[7]);
 		room.setDescription(hoteldetails[8]);
 		hotel.setRoomInfo(room);
-		hotel.setPrice(Double.parseDouble(hoteldetails[9]));		
-		
+		hotel.setPrice(Double.parseDouble(hoteldetails[9]));
+
 		return hotel;
 	}
 
-	public List<Hotel> hotelsByIds(String ids){
+	public List<Hotel> hotelsByIds(String ids) {
 		List<Hotel> hotelList = new ArrayList<>();
-		String id[] = ids.split(","); 
-		
-		for(String strId : id) {
-			hotelList.add(hotelDataMap.get(Integer.parseInt(strId)));
+		String id[] = ids.split(",");
+
+		for (String strId : id) {
+			Hotel hotel = hotelDataMap.get(Integer.parseInt(strId));
+			if (hotel != null)
+				hotelList.add(hotel);
 		}
 		return hotelList;
 	}
