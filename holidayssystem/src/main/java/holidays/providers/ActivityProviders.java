@@ -24,7 +24,7 @@ public class ActivityProviders {
 		// TODO Auto-generated method stub
 		try {
 			File activityData = new File(
-					"/Users/akshaychopra/Documents/HolidaysBookingSystem/holidayssystem/src/main/java/holidays/datacontents/file/ActivityData.txt");
+					"src/main/java/holidays/datacontents/file/ActivityData.txt");
 			FileReader fileReader = new FileReader(activityData);
 			BufferedReader bufReader = new BufferedReader(fileReader);
 			String line = "";

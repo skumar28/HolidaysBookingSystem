@@ -23,7 +23,7 @@ public class FlightsProvider {
 		// TODO Auto-generated method stub
 		try {
 			File flightData = new File(
-					"/Users/akshaychopra/Documents/HolidaysBookingSystem/holidayssystem/src/main/java/holidays/datacontents/file/FlightsData.txt");
+					"src/main/java/holidays/datacontents/file/FlightsData.txt");
 			FileReader fileReader = new FileReader(flightData);
 			BufferedReader bufReader = new BufferedReader(fileReader);
 			String line = "";

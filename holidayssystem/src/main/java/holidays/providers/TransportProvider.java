@@ -15,14 +15,14 @@ public class TransportProvider {
 	Map<Integer, Transport> transportDataMap = new HashMap<>();
 
 	public TransportProvider() {
-		loadActivityData();
+		loadTransportData();
 	}
 
-	private void loadActivityData() {
+	private void loadTransportData() {
 		// TODO Auto-generated method stub
 		try {
 			File transportData = new File(
-					"/Users/akshaychopra/Documents/HolidaysBookingSystem/holidayssystem/src/main/java/holidays/datacontents/file/TransportData.txt");
+					"src/main/java/holidays/datacontents/file/TransportData.txt");
 			FileReader fileReader = new FileReader(transportData);
 			BufferedReader bufReader = new BufferedReader(fileReader);
 			String line = "";

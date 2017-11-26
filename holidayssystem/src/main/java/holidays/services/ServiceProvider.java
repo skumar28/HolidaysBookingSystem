@@ -27,7 +27,7 @@ public class ServiceProvider {
 		// TODO Auto-generated method stub
 		try {
 			File serviceData = new File(
-					"/Users/akshaychopra/Documents/HolidaysBookingSystem/holidayssystem/src/main/java/holidays/datacontents/file/HolidayPacakges.txt");
+					"src/main/java/holidays/datacontents/file/HolidayPacakges.txt");
 			FileReader fileReader = new FileReader(serviceData);
 			BufferedReader bufReader = new BufferedReader(fileReader);
 			String line = "";
