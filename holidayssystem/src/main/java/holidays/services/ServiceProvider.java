@@ -188,13 +188,16 @@ public class ServiceProvider {
 	public HolidayPackage selectPackage(int id, List<HolidayPackage> hpList) {
 
 		for (HolidayPackage hpPkg : hpList) {
-			if (hpPkg.getId() == id) {
+			if (hpPkg.getId() == id) {				
 				return hpPkg;
 			}
 		}
 		return null;
 	}
 
+	@Requires({"hp != null"})
+	@Ensures({"result != null",
+		"validatePrice(result)"})
 	public HolidayPackage bookPackage(HolidayPackage hp) {
 		System.out.println("**************************************************************");
 		System.out.println("ID :" + hp.getId() + "   Package Name: " + hp.getName());
@@ -254,5 +257,39 @@ public class ServiceProvider {
 	public boolean cancelPackage(Integer id) {
 
 		return true;
+	}
+	
+	/**
+	 * Contract validation for price checking 
+	 * @param hp
+	 * @return
+	 */
+	public boolean validatePrice(HolidayPackage hp) {
+		double calculatedPrice = hp.getTotalPrice();
+		Double totalPrice = 0d;
+		if (!hp.getFlights().isEmpty()) {
+			for (Flight flight : hp.getFlights()) {
+				totalPrice += flight.getPrice();
+			}
+		}
+		if (!hp.getHotels().isEmpty()) {
+			for (Hotel htl : hp.getHotels()) {
+				totalPrice += htl.getPrice();
+			}
+		}
+		if (!hp.getActivities().isEmpty()) {
+			for (Activity act : hp.getActivities()) {
+				totalPrice += act.getPrice();
+			}
+		}
+		if (!hp.getTransport().isEmpty()) {
+			for (Transport transport : hp.getTransport()) {
+				totalPrice += transport.getPrice();
+			}
+		}
+		if (totalPrice == calculatedPrice)
+			return true;
+		else
+			return false;
 	}
 }
