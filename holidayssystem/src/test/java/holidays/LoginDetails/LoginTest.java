@@ -21,12 +21,4 @@ public class LoginTest extends TestCase {
 		userInfo1.setPassword("1234");
 		assertTrue(login.validateUser(userInfo1));
 	}
-
-	public void testRegisterLoginInfo() {
-		userInfo2 = new LoginInfo();
-		rand = new Random();
-		userInfo2.setUserName("pqrst" + rand.nextInt(1000));
-		userInfo2.setPassword("123");
-		assertTrue(login.registerNewUser(userInfo2));
-	}
 }
