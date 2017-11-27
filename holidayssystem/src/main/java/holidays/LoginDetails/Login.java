@@ -26,7 +26,7 @@ public class Login {
 					loginData.put(parts[0], parts[1]);
 				}
 				// in.close();
-				System.out.println(loginData.toString());
+				//System.out.println(loginData.toString());
 			}
 
 			catch (Exception ex) {
@@ -52,7 +52,7 @@ public class Login {
 		try {
 			String value;
 			value = (String) loginData.get(userInfo.getUserName());
-			if (value.equals(userInfo.getPassword()))
+			if (value != null && value.equals(userInfo.getPassword()))
 				return true;
 			else
 				return false;

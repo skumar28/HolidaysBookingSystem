@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Requires;
+
 import holidays.components.Flight;
 import holidays.customer.CustomerInfo;
 import holidays.providers.*;
@@ -68,6 +71,9 @@ public class ServiceProvider {
 		return holidayPackage;
 	}
 
+	@Requires({"ids != null" , "ids.length() > 0"})
+	@Ensures({"result != null",
+		"result.size() > 0"})
 	public List<HolidayPackage> packageByIds(String ids) {
 		List<HolidayPackage> packageList = new ArrayList<>();
 		String id[] = ids.split(",");
@@ -81,6 +87,9 @@ public class ServiceProvider {
 		return packageList;
 	}
 
+	@Requires({"searchcriteria != null" , "searchcriteria.length() > 0"})
+	@Ensures({"result != null",
+		"result.size() > 0"})
 	public List<HolidayPackage> searchPackage(String searchcriteria) {
 
 		List<HolidayPackage> packageList = new ArrayList<>();
@@ -94,6 +103,7 @@ public class ServiceProvider {
 		return packageList;
 	}
 
+	@Requires({"listPackages != null", "listPackages.size() > 0"})
 	public void ListPackages(List<HolidayPackage> listPackages) {
 
 		List<Hotel> hotelList = new ArrayList<>();
@@ -172,14 +182,58 @@ public class ServiceProvider {
 		}
 	}
 
-	public HolidayPackage selectPackage(String id) {
+	@Requires({"hpList != null" , "hpList.size() > 0"})
+	@Ensures({"result != null",
+		"result.getId() == old(id)"})
+	public HolidayPackage selectPackage(int id, List<HolidayPackage> hpList) {
 
+		for (HolidayPackage hpPkg : hpList) {
+			if (hpPkg.getId() == id) {
+				return hpPkg;
+			}
+		}
 		return null;
 	}
 
 	public HolidayPackage bookPackage(HolidayPackage hp) {
-
-		return null;
+		System.out.println("**************************************************************");
+		System.out.println("ID :" + hp.getId() + "   Package Name: " + hp.getName());
+		System.out.println("**************************************************************");
+		System.out.println("Description :" + hp.getDescription());
+		System.out.println("Type :" + hp.getType());
+		System.out.println("Duration :" + hp.getDuration());
+		System.out.println("From City :" + hp.getFromCity());
+		System.out.println("Flight Included :" + !hp.getFlights().isEmpty());
+		System.out.println("Hotel Included :" + !hp.getHotels().isEmpty());
+		System.out.println("Activity Included :" + !hp.getActivities().isEmpty());
+		System.out.println("Transport Included :" + !hp.getTransport().isEmpty());
+		Double totalPrice = 0d;
+		if(!hp.getFlights().isEmpty()) {
+			for (Flight flight : hp.getFlights()) {
+				totalPrice += flight.getPrice();	
+			}
+		}
+		if(!hp.getHotels().isEmpty()) {
+			for (Hotel htl : hp.getHotels()) {
+				totalPrice += htl.getPrice();	
+			}
+		}
+		if(!hp.getActivities().isEmpty()) {
+			for (Activity act : hp.getActivities()) {
+				totalPrice += act.getPrice();	
+			}
+		}
+		if(!hp.getTransport().isEmpty()) {
+			for (Transport transport : hp.getTransport()) {
+				totalPrice += transport.getPrice();	
+			}
+		}
+		System.out.println("--------------------------------------------------------------");
+		System.out.println("            Total Package Price : " + totalPrice +"$");
+		System.out.println("--------------------------------------------------------------");
+		hp.setTotalPrice(totalPrice);
+		
+		return hp;
 	}
 
 	public boolean makePayment(String packageId, CustomerInfo customer) {

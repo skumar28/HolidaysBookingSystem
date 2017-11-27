@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Requires;
+
 import holidays.components.Hotel;
 import holidays.components.Transport;
 
@@ -52,6 +55,9 @@ public class TransportProvider {
 		return transport;
 	}
 
+	@Requires({"ids != null" , "ids.length() > 0"})
+	@Ensures({"result != null",
+		"result.size() > 0"})
 	public List<Transport> transportByIds(String ids) {
 		List<Transport> transportList = new ArrayList<>();
 		String id[] = ids.split(",");

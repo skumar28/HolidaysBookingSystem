@@ -30,9 +30,11 @@ public class FlightsProviderTest extends TestCase {
 		assertTrue(flightList.isEmpty());
 	}
 	
+	/*public static void main(String arg[]) {
+		System.out.println(gcd(0,0));
+	}*/
 	
 	
-	//@Requires({ " flightList.size() > 0" })
 	public  void testDisplayFlight() {
 		FlightsProvider flightProvider = new FlightsProvider();
 		List<Flight> flightList = flightProvider.flightsByIds("1,2");
@@ -42,7 +44,7 @@ public class FlightsProviderTest extends TestCase {
 		assertNotNull(flightList);
 	}
 	
-	@Requires({ "x > 5", "y > 0" })
+	/*@Requires({ "x > 0", "y > 0" })
 	@Ensures({ "result != 0", 
 		       "old(x) % result == 0", 
 		       "old(y) % result == 0" })
@@ -55,6 +57,6 @@ public class FlightsProviderTest extends TestCase {
 			}
 		}
 		return (x != 0) ? x : y;
-	}
+	}*/
 
 }
