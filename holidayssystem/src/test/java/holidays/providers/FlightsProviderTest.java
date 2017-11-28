@@ -6,24 +6,35 @@ import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
 
 import holidays.components.Flight;
+
 import junit.framework.TestCase;
 
 public class FlightsProviderTest extends TestCase {
 	
+	FlightsProvider flightProvider;
+	
+	
+	public void setUp() {
+		flightProvider = new FlightsProvider();
+	}
+
 	public void testFlightsProvider()
-    {
-        assertTrue( true );
+    {	
+		List<Flight> flightList = flightProvider.flightsByIds("1");
+		
+		assertEquals(1, flightList.size());
     }
 	
-	public static void main(String args[]) {
-		FlightsProvider flightProvider = new FlightsProvider();
-		List<Flight> flightList = flightProvider.flightsByIds("1,2");
-		int size = flightList.size(); 
-		//displayFlight(flightList);
-		System.out.println(gcd(4,2));
-		
+	public void testNoFlightFound() {
+		List<Flight> flightList = flightProvider.flightsByIds("100");
+		assertTrue(flightList.isEmpty());
 	}
-	//@Requires({ " flightList.size() > 0" })
+	
+	/*public static void main(String arg[]) {
+		System.out.println(gcd(0,0));
+	}*/
+	
+	
 	public  void testDisplayFlight() {
 		FlightsProvider flightProvider = new FlightsProvider();
 		List<Flight> flightList = flightProvider.flightsByIds("1,2");
@@ -33,7 +44,7 @@ public class FlightsProviderTest extends TestCase {
 		assertNotNull(flightList);
 	}
 	
-	@Requires({ "x > 5", "y > 0" })
+	/*@Requires({ "x > 0", "y > 0" })
 	@Ensures({ "result != 0", 
 		       "old(x) % result == 0", 
 		       "old(y) % result == 0" })
@@ -46,6 +57,6 @@ public class FlightsProviderTest extends TestCase {
 			}
 		}
 		return (x != 0) ? x : y;
-	}
+	}*/
 
 }

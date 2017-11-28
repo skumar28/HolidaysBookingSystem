@@ -8,8 +8,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Requires;
+
 import holidays.components.Activity;
 import holidays.components.Flight;
+import holidays.components.Hotel;
 
 public class ActivityProviders {
 
@@ -54,12 +58,18 @@ public class ActivityProviders {
 		return activity;
 	}
 
+	@Requires({"ids != null" , "ids.length() > 0"})
+	@Ensures({"result != null",
+		"result.size() > 0"})
 	public List<Activity> activityByIds(String ids){
 		List<Activity> activityList = new ArrayList<>();
 		String id[] = ids.split(","); 
 		
 		for(String strId : id) {
-			activityList.add(activityDataMap.get(Integer.parseInt(strId)));
+			
+			Activity activity = activityDataMap.get(Integer.parseInt(strId));
+			if (activity != null)
+				activityList.add(activity);
 		}
 		return activityList;
 	}

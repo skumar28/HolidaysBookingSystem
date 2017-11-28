@@ -8,9 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
 
 import holidays.components.Flight;
+import holidays.components.Hotel;
 
 
 public class FlightsProvider {
@@ -44,7 +46,7 @@ public class FlightsProvider {
 	//1#Emirates#E-515#Buffalo#New York#10.00AM#12.00PM#80
 	private Flight populateFlight(String line) {
 		String flightdetails[] = line.split("#");
-		
+		 
 		Flight flight = new Flight();
 		flight.setId(Integer.parseInt(flightdetails[0]));
 		flight.setCarrierName(flightdetails[1]);
@@ -57,13 +59,18 @@ public class FlightsProvider {
 		
 		return flight;
 	}
-	@Requires("ids.length() > 0")
+	@Requires({"ids != null" , "ids.length() > 0"})
+	@Ensures({"result != null",
+		"result.size() > 0"})
 	public List<Flight> flightsByIds(String ids){
 		List<Flight> flightList = new ArrayList<>();
 		String id[] = ids.split(","); 
 		
 		for(String strId : id) {
-			flightList.add(flightDataMap.get(Integer.parseInt(strId)));
+			
+			Flight flight = flightDataMap.get(Integer.parseInt(strId));
+			if (flight != null)
+				flightList.add(flight);
 		}
 		return flightList;
 	}
