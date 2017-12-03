@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import holidays.LoginDetails.Login;
+import holidays.customer.CustomerInfo;
 import holidays.customer.LoginInfo;
 
 public class HolidaysBookingSystem {
@@ -26,7 +27,8 @@ public class HolidaysBookingSystem {
 		System.out.println("1. Search Package");
 		System.out.println("2. Select Package");
 		System.out.println("3. Book Package");
-		System.out.println("4. Exit");
+		System.out.println("4. Make Payment");
+		System.out.println("5. Exit");
 		System.out.println("---------------------------");
 		System.out.println("Please Enter Your Choice:");
 		Scanner userInput = new Scanner(System.in);
@@ -47,12 +49,30 @@ public class HolidaysBookingSystem {
 			bookPakcage(hpPackage, userInfo, serviceProvider);
 			break;
 		case 4:
+			userInput = new Scanner(System.in);
+			System.out.println("Enter Full Name: ");			
+			String fullName = userInput.next();
+			System.out.println("Enter Email: ");			
+			String email = userInput.next();
+			System.out.println("Enter Phone No: ");			
+			String phone = userInput.next();
+			System.out.println("Enter Crad Detail: ");			
+			String cardDetail = userInput.next();
+			
+			CustomerInfo custInfo = new CustomerInfo();
+			custInfo.setUsername(userInfo.getUserName());
+			custInfo.setFullName(fullName);
+			custInfo.setEmail(email);
+			custInfo.setContactNum(phone);
+			custInfo.setCardDetail(cardDetail);
+			String confirmationMsg = serviceProvider.makePayment(hpPackage.getId(), custInfo);
+			System.out.println(confirmationMsg);
 			break;
 		default:
 			System.out.println("Please enter correct Choice");
 		}
 		
-		if(choice == 4)
+		if(choice == 5)
 			break;
 		}
 		

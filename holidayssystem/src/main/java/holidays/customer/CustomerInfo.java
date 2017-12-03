@@ -6,6 +6,7 @@ public class CustomerInfo {
 	String email;
 	String contactNum;
 	String address;
+	String cardDetail;
 
 	public String getUsername() {
 		return username;
@@ -46,5 +47,14 @@ public class CustomerInfo {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+	public String getCardDetail() {
+		return cardDetail;
+	}
+
+	public void setCardDetail(String cardDetail) {
+		this.cardDetail = cardDetail;
+	}	
+	
 
 }

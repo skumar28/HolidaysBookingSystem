@@ -195,6 +195,12 @@ public class ServiceProvider {
 		return null;
 	}
 
+	public HolidayPackage getPackageById(int id) {
+		HolidayPackage hp = packageDataMap.get(id);
+		
+		return hp;
+	}
+	
 	@Requires({"hp != null"})
 	@Ensures({"result != null",
 		"validatePrice(result)"})
@@ -210,6 +216,52 @@ public class ServiceProvider {
 		System.out.println("Hotel Included :" + !hp.getHotels().isEmpty());
 		System.out.println("Activity Included :" + !hp.getActivities().isEmpty());
 		System.out.println("Transport Included :" + !hp.getTransport().isEmpty());
+		Double totalPrice = getTotalPrice(hp);
+		System.out.println("--------------------------------------------------------------");
+		System.out.println("            Total Package Price : " + totalPrice +"$");
+		System.out.println("--------------------------------------------------------------");
+		hp.setTotalPrice(totalPrice);
+		
+		return hp;
+	}
+
+	public String makePayment(int packageId, CustomerInfo customer) {
+		Boolean savePkgInfo = true;
+		//savePkgInfo = savePackage(hp, customer);
+		
+		if(savePkgInfo) {
+			return sendConfirmation("SUCCESS");
+		}
+		else {
+			return sendConfirmation("FAILURE");
+		}		
+	}
+
+	public Boolean savePackage(HolidayPackage hp, CustomerInfo customer) {
+		// Write pacakge imp info and customer info into a new file called.. bookedpackagesinfo.txt 
+		return true;
+	}
+
+	public String sendConfirmation(String status) {
+
+		if(status.equalsIgnoreCase("SUCCESS")) {
+			return "Congratulations !!! You have SuccessFully Booked The Package. ";
+		}
+		
+		if(status.equalsIgnoreCase("FAILURE")) {
+			return "Sorry !!! There is error in Booking Package Please Start Again";
+		}
+		
+		return null;
+	}
+
+	public boolean cancelPackage(Integer id) {
+
+		return true;
+	}
+	
+	public double getTotalPrice(HolidayPackage hp) {
+		
 		Double totalPrice = 0d;
 		if(!hp.getFlights().isEmpty()) {
 			for (Flight flight : hp.getFlights()) {
@@ -231,32 +283,7 @@ public class ServiceProvider {
 				totalPrice += transport.getPrice();	
 			}
 		}
-		System.out.println("--------------------------------------------------------------");
-		System.out.println("            Total Package Price : " + totalPrice +"$");
-		System.out.println("--------------------------------------------------------------");
-		hp.setTotalPrice(totalPrice);
-		
-		return hp;
-	}
-
-	public boolean makePayment(String packageId, CustomerInfo customer) {
-
-		return true;
-	}
-
-	public Boolean savePackage(HolidayPackage hp, CustomerInfo customer) {
-
-		return true;
-	}
-
-	public String sendConfirmation() {
-
-		return null;
-	}
-
-	public boolean cancelPackage(Integer id) {
-
-		return true;
+		return totalPrice;
 	}
 	
 	/**
