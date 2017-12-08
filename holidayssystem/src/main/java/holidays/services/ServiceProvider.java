@@ -2,8 +2,11 @@ package holidays.services;
 
 import holidays.components.*;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -227,7 +230,8 @@ public class ServiceProvider {
 
 	public String makePayment(int packageId, CustomerInfo customer) {
 		Boolean savePkgInfo = true;
-		//savePkgInfo = savePackage(hp, customer);
+		HolidayPackage hp= packageDataMap.get(packageId);
+		savePkgInfo = savePackage(hp, customer);
 		
 		if(savePkgInfo) {
 			return sendConfirmation("SUCCESS");
@@ -239,7 +243,33 @@ public class ServiceProvider {
 
 	public Boolean savePackage(HolidayPackage hp, CustomerInfo customer) {
 		// Write pacakge imp info and customer info into a new file called.. bookedpackagesinfo.txt 
-		return true;
+		
+		BufferedWriter writetoFile = null;
+		
+		try {
+			writetoFile = new BufferedWriter(new FileWriter("/Users/akshaychopra/Documents/oodproject/HolidaysBookingSystem/holidayssystem/src/main/java/holidays/datacontents/file/bookedpackagesinfo.txt", true));
+			writetoFile.write("\n"+customer.getUsername()+"#"+customer.getEmail()+"#"+hp.getId()+"#"+hp.getName()+"#"+hp.getFromCity());	
+			//writetoFile.write("\n");
+			return true;
+			
+		}
+		
+		catch(Exception ex)
+		{
+			System.out.println(ex.getMessage());
+			return false;
+			
+		}
+		finally {
+			try {
+				writetoFile.close();
+			} catch (IOException e) {
+				System.out.println(e.getMessage());
+			}
+			
+		}
+		
+		
 	}
 
 	public String sendConfirmation(String status) {
@@ -255,9 +285,59 @@ public class ServiceProvider {
 		return null;
 	}
 
-	public boolean cancelPackage(Integer id) {
+	public boolean cancelPackage(Integer id, String userName) 
+	{
+		BufferedReader readfromFile=null;
+		BufferedWriter writetoFile = null;
+		
+		try {						
+			readfromFile = new BufferedReader(new FileReader("src/main/java/holidays/datacontents/file/bookedpackagesinfo.txt"));
+			//writetoFile = new BufferedWriter(new FileWriter("/Users/akshaychopra/Documents/oodproject/HolidaysBookingSystem/holidayssystem/src/main/java/holidays/datacontents/file/bookedpackagesinfo.txt"));
+			
+			String sLine = "";
+			String sData="";
+			
+				while ((sLine = readfromFile.readLine()) != null)
+				{
+					String parts[] = sLine.split("#");
+					if(parts[0].equals(userName) && parts[2].equals(id.toString()))
+					{
+											
+					}
+					else
+					{
+						sData+=sLine;
+						sData+="\n";
+					}
+					
+					
+				}
+				writetoFile = new BufferedWriter(new FileWriter("src/main/java/holidays/datacontents/file/bookedpackagesinfo.txt"));
+				writetoFile.write(sData);
+				
+				
+				return true;
+			}
+		
+		catch(Exception ex)
+		{
+			System.out.println(ex.getMessage());
+			return false;
+			
+		}
+		finally {
+			try {
+				readfromFile.close();
+				writetoFile.close();
+			} catch (IOException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		
+		
 
-		return true;
+		
 	}
 	
 	public double getTotalPrice(HolidayPackage hp) {
