@@ -242,34 +242,34 @@ public class ServiceProvider {
 	}
 
 	public Boolean savePackage(HolidayPackage hp, CustomerInfo customer) {
-		// Write pacakge imp info and customer info into a new file called.. bookedpackagesinfo.txt 
-		
+		// Write pacakge imp info and customer info into a new file called..
+		// bookedpackagesinfo.txt
+
 		BufferedWriter writetoFile = null;
-		
+
 		try {
-			writetoFile = new BufferedWriter(new FileWriter("/Users/akshaychopra/Documents/oodproject/HolidaysBookingSystem/holidayssystem/src/main/java/holidays/datacontents/file/bookedpackagesinfo.txt", true));
-			writetoFile.write("\n"+customer.getUsername()+"#"+customer.getEmail()+"#"+hp.getId()+"#"+hp.getName()+"#"+hp.getFromCity());	
-			//writetoFile.write("\n");
+			writetoFile = new BufferedWriter(
+					new FileWriter("src/main/java/holidays/datacontents/file/bookedpackagesinfo.txt", true));
+			writetoFile.write("\n" + customer.getUsername() + "#" + customer.getEmail() + "#" + hp.getId() + "#"
+					+ hp.getName() + "#" + hp.getFromCity());
+			// writetoFile.write("\n");
 			return true;
-			
+
 		}
-		
-		catch(Exception ex)
-		{
+
+		catch (Exception ex) {
 			System.out.println(ex.getMessage());
 			return false;
-			
-		}
-		finally {
+
+		} finally {
 			try {
 				writetoFile.close();
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
 			}
-			
+
 		}
-		
-		
+
 	}
 
 	public String sendConfirmation(String status) {
@@ -332,12 +332,7 @@ public class ServiceProvider {
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
 			}
-		}
-		
-		
-		
-
-		
+		}	
 	}
 	
 	public double getTotalPrice(HolidayPackage hp) {
