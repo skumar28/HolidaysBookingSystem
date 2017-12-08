@@ -28,18 +28,31 @@ import holidays.components.Activity;
 import holidays.components.Flight;
 import holidays.components.Hotel;
 import holidays.components.Transport;
+import holidays.customer.CustomerInfo;
 
 public class HolidaySearchFrame implements ActionListener {
 	JButton bookPackage;
 	JButton makePayment;
+	JButton submitPayment;
+	JButton cancelPacakge;
+	JButton customerSupport;
+	
 	JFrame frame = new JFrame();
 	JPanel topPanel = new JPanel();
+	JPanel botPanel = new JPanel();
+	
 	JPanel searchPanel = new JPanel();
 	JPanel resultPanel = new JPanel();
 	ServiceProvider serviceProvider = new ServiceProvider();
+	CustomerInfo custInfo;
 	JButton searchButton;
 	JTextField searchTextField;
 	JLabel lable = new JLabel();
+	
+	JTextField textField_0 = new JTextField();
+	JTextField textField_1 = new JTextField();
+	JTextField textField_2 = new JTextField();
+	JTextField textField_3 = new JTextField();
 
 	public HolidaySearchFrame() {
 
@@ -63,10 +76,23 @@ public class HolidaySearchFrame implements ActionListener {
 		searchButton.setActionCommand("search");
 		searchButton.addActionListener(this);
 
+		cancelPacakge = new JButton("Cancel Package");
+		cancelPacakge.setActionCommand("Cancel");
+		cancelPacakge.addActionListener(this);
+		
+		customerSupport = new JButton("Customer Support");
+		customerSupport.setActionCommand("support");
+		customerSupport.addActionListener(this);		
+		
+		botPanel.add(cancelPacakge);
+		botPanel.add(customerSupport);
+		
 		JScrollPane scrPane = new JScrollPane(resultPanel);
 		Container contentPane = frame.getContentPane();
 		contentPane.add(topPanel, BorderLayout.NORTH);
 		contentPane.add(scrPane, BorderLayout.CENTER);
+		contentPane.add(botPanel, BorderLayout.SOUTH);
+		
 		scrPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		searchPanel.add(searchButton);
@@ -195,9 +221,7 @@ public class HolidaySearchFrame implements ActionListener {
 			Font nameFont = new Font("Helvetica", Font.BOLD, 16);
 			nameLabel.setFont(nameFont);
 			theBox.add(nameLabel);
-			// addComp(thePanel, nameLabel, 0, count++, 1, 1, GridBagConstraints.EAST,
-			// GridBagConstraints.NONE);
-
+			
 			JLabel descLabel = new JLabel("Description: " + hp.getDescription());
 			theBox.add(descLabel);
 			JLabel type = new JLabel("Type: " + hp.getType());
@@ -274,8 +298,79 @@ public class HolidaySearchFrame implements ActionListener {
 			int packageId = Integer.parseInt(packInfo[1]);
 
 			HolidayPackage hp = serviceProvider.getPackageById(packageId);
+			Box theBoxV = Box.createVerticalBox();			
+			JPanel tempPanel = new JPanel();
+			
+			JLabel lblName = new JLabel("Name");
+			lblName.setBounds(65, 68, 46, 14);
+			tempPanel.add(lblName);
+				
+			textField_0.setBounds(128, 65, 150, 20);
+			tempPanel.add(textField_0);
+			textField_0.setColumns(10);
+			theBoxV.add(tempPanel);
+			
+			 tempPanel = new JPanel();
+			JLabel lblPhone = new JLabel("Phone");
+			lblPhone.setBounds(65, 68, 46, 14);
+			tempPanel.add(lblPhone);
+						
+			textField_1.setBounds(128, 65, 150, 20);
+			tempPanel.add(textField_1);
+			textField_1.setColumns(10);
+			theBoxV.add(tempPanel);
+			
+			tempPanel = new JPanel();
+			JLabel lblEmailId = new JLabel("Email Id");
+			lblEmailId.setBounds(65, 115, 46, 14);
+			tempPanel.add(lblEmailId);			
+			
+			textField_2.setBounds(128, 112, 150, 20);
+			tempPanel.add(textField_2);
+			textField_2.setColumns(10);
+			theBoxV.add(tempPanel);
+			
+			tempPanel = new JPanel();
+			JLabel lblCard = new JLabel("Card Details");
+			lblCard.setBounds(65, 162, 46, 14);
+			tempPanel.add(lblCard);			
+			
+			textField_3.setBounds(128, 112, 150, 20);
+			tempPanel.add(textField_3);
+			textField_3.setColumns(10);
+			theBoxV.add(tempPanel);
+			
+			submitPayment = new JButton("Pay");
+			submitPayment.setActionCommand("Submit Payment #" + hp.getId());
+			submitPayment.addActionListener(this);
+			theBoxV.add(submitPayment);
 
-			// write a form here and Submit button 
+
+			thePanel.add(theBoxV);			
+			
+			resultPanel.add(thePanel);
+			SwingUtilities.updateComponentTreeUI(frame);
+		}
+		
+		if (e.getActionCommand().contains("Submit Payment")) {
+			System.out.println("Submit Payment called" + e.getActionCommand());
+			String packInfo[] = e.getActionCommand().split("#");
+			int packageId = Integer.parseInt(packInfo[1]);
+			
+			custInfo = new CustomerInfo();
+			custInfo.setUsername(textField_0.getText());
+			custInfo.setEmail(textField_2.getText());
+			custInfo.setContactNum(textField_1.getText());
+			custInfo.setCardDetail(textField_3.getText());
+						
+			HolidayPackage hp = serviceProvider.getPackageById(packageId);
+			String confirmationMessage = serviceProvider.makePayment(packageId, custInfo);
+			JLabel nameLabel = new JLabel(confirmationMessage + " : " + hp.getName());
+			Font nameFont = new Font("Helvetica", Font.BOLD, 16);
+			nameLabel.setFont(nameFont);
+			thePanel.add(nameLabel);
+			resultPanel.add(thePanel);			
+			SwingUtilities.updateComponentTreeUI(frame);
 		}
 	}
 

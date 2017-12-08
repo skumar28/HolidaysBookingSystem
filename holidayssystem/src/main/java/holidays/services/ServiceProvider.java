@@ -275,11 +275,11 @@ public class ServiceProvider {
 	public String sendConfirmation(String status) {
 
 		if(status.equalsIgnoreCase("SUCCESS")) {
-			return "Congratulations !!! You have SuccessFully Booked The Package. ";
+			return "Congratulations !!! You have Successfully Booked The Package. ";
 		}
 		
 		if(status.equalsIgnoreCase("FAILURE")) {
-			return "Sorry !!! There is error in Booking Package Please Start Again";
+			return "Sorry !!! There is error in Booking Package Please Start Again Or Contact our Customer Support";
 		}
 		
 		return null;
