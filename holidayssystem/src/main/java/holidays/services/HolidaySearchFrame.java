@@ -149,8 +149,16 @@ public class HolidaySearchFrame implements ActionListener {
 						theBox.add(fDetail);
 
 						for (Flight flight : flightList) {
-							Box flightBox = Box.createHorizontalBox();
-
+							Box flightBox = Box.createVerticalBox();
+							JLabel flightName= new JLabel("Flight Name: "+ flight.getFlightName()+", "+flight.getCarrierName());
+							flightBox.add(flightName);
+							JLabel departureAirport= new JLabel("Departure Airport: "+flight.getFromCity()+" Time: "+flight.getStartTime());
+							flightBox.add(departureAirport);
+							JLabel arrivalAirport=new JLabel("Arrival Airport: "+flight.getToCity()+" Time: "+flight.getEndTime());														
+							flightBox.add(arrivalAirport);
+							JLabel seprator=new JLabel("                                       ");
+							flightBox.add(seprator);
+							theBox.add(flightBox);
 						}
 					}
 
@@ -160,7 +168,19 @@ public class HolidaySearchFrame implements ActionListener {
 						theBox.add(hDetail);
 
 						for (Hotel htl : hotelList) {
-							Box hotelBox = Box.createHorizontalBox();
+							Box hotelBox = Box.createVerticalBox();
+							JLabel hotelName=new JLabel("Hotel Name: "+htl.getName()+" City: "+htl.getCityName());
+							hotelBox.add(hotelName);
+							JLabel description= new JLabel("Description: "+htl.getDescription());
+							hotelBox.add(description);
+							JLabel hoteltime= new JLabel("Checkin Time: "+htl.getCheckinTime()+" Checkout Time: "+htl.getCheckoutTime());
+							hotelBox.add(hoteltime);
+							JLabel hotelroom= new JLabel("Room: "+htl.getRoomInfo().getDescription()+" Meal: "+htl.getRoomInfo().getCategory());
+							hotelBox.add(hotelroom);
+							JLabel seprator=new JLabel("                                       ");
+							hotelBox.add(seprator);
+							theBox.add(hotelBox);
+							
 
 						}
 					}
@@ -171,7 +191,15 @@ public class HolidaySearchFrame implements ActionListener {
 						theBox.add(aDetail);
 						for (Activity act : activityList) {
 
-							Box activityBox = Box.createHorizontalBox();
+							Box activityBox = Box.createVerticalBox();
+							JLabel activityName= new JLabel("Activity Name:" +act.getName()+" Duration: "+act.getDuration());
+							activityBox.add(activityName);
+							JLabel activityDescription=new JLabel("Description: "+act.getDescription());
+							activityBox.add(activityDescription);
+							JLabel seprator=new JLabel("                                       ");
+							activityBox.add(seprator);
+							theBox.add(activityBox);
+							
 						}
 					}
 					JLabel tDetail = new JLabel("Transport Details");
@@ -179,7 +207,16 @@ public class HolidaySearchFrame implements ActionListener {
 					theBox.add(tDetail);
 					if (!transportList.isEmpty()) {
 						for (Transport trp : transportList) {
-							Box transportBox = Box.createHorizontalBox();
+							Box transportBox = Box.createVerticalBox();
+							
+							JLabel transportName= new JLabel("Transport Name: "+trp.getName());
+							transportBox.add(transportName);
+							JLabel transportDescription=new JLabel("Description: "+ trp.getDescription());
+							transportBox.add(transportDescription);
+							JLabel seprator=new JLabel("                                       ");
+							transportBox.add(seprator);
+							theBox.add(transportBox);
+							
 						}
 					}
 					bookPackage = new JButton("Book Package");
@@ -188,6 +225,7 @@ public class HolidaySearchFrame implements ActionListener {
 					theBox.add(bookPackage);
 
 					thePanel.add(theBox);
+					
 				}
 
 				serviceProvider.ListPackages(hpList);
@@ -239,7 +277,16 @@ public class HolidaySearchFrame implements ActionListener {
 				theBox.add(fDetail);
 
 				for (Flight flight : flightList) {
-					Box flightBox = Box.createHorizontalBox();
+					Box flightBox = Box.createVerticalBox();
+					JLabel flightName= new JLabel("Flight Name: "+ flight.getFlightName()+", "+flight.getCarrierName());
+					flightBox.add(flightName);
+					JLabel departureAirport= new JLabel("Departure Airport: "+flight.getFromCity()+" Time: "+flight.getStartTime());
+					flightBox.add(departureAirport);
+					JLabel arrivalAirport=new JLabel("Arrival Airport: "+flight.getToCity()+" Time: "+flight.getEndTime());														
+					flightBox.add(arrivalAirport);
+					JLabel seprator=new JLabel("                                       ");
+					flightBox.add(seprator);
+					theBox.add(flightBox);
 
 				}
 			}
@@ -250,7 +297,18 @@ public class HolidaySearchFrame implements ActionListener {
 				theBox.add(hDetail);
 
 				for (Hotel htl : hotelList) {
-					Box hotelBox = Box.createHorizontalBox();
+					Box hotelBox = Box.createVerticalBox();
+					JLabel hotelName=new JLabel("Hotel Name: "+htl.getName()+" City: "+htl.getCityName());
+					hotelBox.add(hotelName);
+					JLabel description= new JLabel("Description: "+htl.getDescription());
+					hotelBox.add(description);
+					JLabel hoteltime= new JLabel("Checkin Time: "+htl.getCheckinTime()+" Checkout Time: "+htl.getCheckoutTime());
+					hotelBox.add(hoteltime);
+					JLabel hotelroom= new JLabel("Room: "+htl.getRoomInfo().getDescription()+" Meal: "+htl.getRoomInfo().getCategory());
+					hotelBox.add(hotelroom);
+					JLabel seprator=new JLabel("                                       ");
+					hotelBox.add(seprator);
+					theBox.add(hotelBox);
 
 				}
 			}
@@ -261,7 +319,14 @@ public class HolidaySearchFrame implements ActionListener {
 				theBox.add(aDetail);
 				for (Activity act : activityList) {
 
-					Box activityBox = Box.createHorizontalBox();
+					Box activityBox = Box.createVerticalBox();
+					JLabel activityName= new JLabel("Activity Name:" +act.getName()+" Duration: "+act.getDuration());
+					activityBox.add(activityName);
+					JLabel activityDescription=new JLabel("Description: "+act.getDescription());
+					activityBox.add(activityDescription);
+					JLabel seprator=new JLabel("                                       ");
+					activityBox.add(seprator);
+					theBox.add(activityBox);
 				}
 			}
 			JLabel tDetail = new JLabel("Transport Details");
@@ -269,7 +334,15 @@ public class HolidaySearchFrame implements ActionListener {
 			theBox.add(tDetail);
 			if (!transportList.isEmpty()) {
 				for (Transport trp : transportList) {
-					Box transportBox = Box.createHorizontalBox();
+					Box transportBox = Box.createVerticalBox();
+					
+					JLabel transportName= new JLabel("Transport Name: "+trp.getName());
+					transportBox.add(transportName);
+					JLabel transportDescription=new JLabel("Description: "+ trp.getDescription());
+					transportBox.add(transportDescription);
+					JLabel seprator=new JLabel("                                       ");
+					transportBox.add(seprator);
+					theBox.add(transportBox);
 				}
 			}
 
@@ -287,6 +360,7 @@ public class HolidaySearchFrame implements ActionListener {
 			theBox.add(makePayment);
 
 			thePanel.add(theBox);
+			
 
 			resultPanel.add(thePanel);
 			SwingUtilities.updateComponentTreeUI(frame);
