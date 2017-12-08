@@ -31,11 +31,17 @@ import holidays.components.Transport;
 import holidays.customer.CustomerInfo;
 
 public class HolidaySearchFrame implements ActionListener {
+	
+	String userName;
+	
 	JButton bookPackage;
 	JButton makePayment;
 	JButton submitPayment;
 	JButton cancelPacakge;
 	JButton customerSupport;
+	JButton cancelPayment;
+	
+	
 	
 	JFrame frame = new JFrame();
 	JPanel topPanel = new JPanel();
@@ -53,8 +59,12 @@ public class HolidaySearchFrame implements ActionListener {
 	JTextField textField_1 = new JTextField();
 	JTextField textField_2 = new JTextField();
 	JTextField textField_3 = new JTextField();
+	JTextField textField_4 = new JTextField();
+	
 
-	public HolidaySearchFrame() {
+	public HolidaySearchFrame(String usrName) {
+		
+		this.userName=usrName;
 
 		frame.setBounds(200, 100, 1400, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,7 +87,7 @@ public class HolidaySearchFrame implements ActionListener {
 		searchButton.addActionListener(this);
 
 		cancelPacakge = new JButton("Cancel Package");
-		cancelPacakge.setActionCommand("Cancel");
+		cancelPacakge.setActionCommand("Cancelthepackage");
 		cancelPacakge.addActionListener(this);
 		
 		customerSupport = new JButton("Customer Support");
@@ -445,6 +455,111 @@ public class HolidaySearchFrame implements ActionListener {
 			thePanel.add(nameLabel);
 			resultPanel.add(thePanel);			
 			SwingUtilities.updateComponentTreeUI(frame);
+		}
+		
+		
+		if(e.getActionCommand().contains("Cancelthepackage")) {
+			System.out.println("Cancel Package called" + e.getActionCommand());
+			
+			
+			
+			
+			Box theBox = Box.createVerticalBox();
+			JPanel tempPanl = new JPanel();
+			
+			JLabel lblID = new JLabel("Package ID");
+			lblID.setBounds(65, 68, 46, 14);
+			tempPanl.add(lblID);
+				
+			textField_4.setBounds(128, 65, 150, 20);
+			textField_4.setColumns(10);
+			tempPanl.add(textField_4);
+			
+			theBox.add(tempPanl);
+			
+			cancelPayment = new JButton("Cancel Order");
+			cancelPayment.setActionCommand("Cancel Order #" );
+			cancelPayment.addActionListener(this);
+			theBox.add(cancelPayment);
+			
+			thePanel.add(theBox);			
+			
+			resultPanel.add(thePanel);
+			SwingUtilities.updateComponentTreeUI(frame);
+			
+			
+		}
+		
+		if(e.getActionCommand().contains("Cancel Order"))
+		{
+			JLabel nameLabel;
+			Font nameFont;
+			System.out.println("Cancel Button called" + e.getActionCommand());
+			String idInfo[] = e.getActionCommand().split("#");
+			int packageID=Integer.parseInt(textField_4.getText());
+			
+			ServiceProvider service= new ServiceProvider();
+			boolean check= service.cancelPackage(packageID, this.userName);
+			
+			if(check==true)
+			{
+				 nameLabel = new JLabel("Package successfully cancelled!!");	
+				 nameFont = new Font("Helvetica", Font.BOLD, 16);
+			}
+			else
+			{
+				 nameLabel = new JLabel("Could not find the package! / Failed to delete the package!");	
+				 nameFont = new Font("Helvetica", Font.BOLD, 16);
+			}
+			nameLabel.setFont(nameFont);
+			thePanel.add(nameLabel);
+			resultPanel.add(thePanel);			
+			SwingUtilities.updateComponentTreeUI(frame);
+			
+		}
+		
+		
+		if(e.getActionCommand().contains("support"))
+		{
+			
+			System.out.println("Customer Support called" + e.getActionCommand());
+			
+			Box theBox = Box.createVerticalBox();
+			JPanel tempPanel = new JPanel();
+			
+			JLabel lblName = new JLabel("Phone Number: 1234567890 ");
+			lblName.setBounds(65, 68, 46, 14);
+			tempPanel.add(lblName);
+				
+		/*	textField_0.setBounds(128, 65, 150, 20);
+			tempPanel.add(textField_0);
+			textField_0.setColumns(10);
+			theBox.add(tempPanel);*/
+			
+			 tempPanel = new JPanel();
+			JLabel lblPhone = new JLabel("Address: ABC Boulevard");
+			lblPhone.setBounds(65, 68, 46, 14);
+			tempPanel.add(lblPhone);
+						
+			/*textField_1.setBounds(128, 65, 150, 20);
+			tempPanel.add(textField_1);
+			textField_1.setColumns(10);
+			theBox.add(tempPanel);*/
+			
+			tempPanel = new JPanel();
+			JLabel lblEmailId = new JLabel("Email Id: abc@xyz.com");
+			lblEmailId.setBounds(65, 115, 46, 14);
+			tempPanel.add(lblEmailId);			
+			
+		/*	textField_2.setBounds(128, 112, 150, 20);
+			tempPanel.add(textField_2);
+			textField_2.setColumns(10);
+			theBox.add(tempPanel);*/
+			thePanel.add(theBox);
+			resultPanel.add(thePanel);			
+			SwingUtilities.updateComponentTreeUI(frame);
+			
+			
 		}
 	}
 

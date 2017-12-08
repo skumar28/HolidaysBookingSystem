@@ -68,10 +68,10 @@ public class LoginSignInScreen implements ActionListener {
 			}
 			else
 			{
-				JOptionPane.showMessageDialog(null, "You have successfully logged in!!");
+				//JOptionPane.showMessageDialog(null, "You have successfully logged in!!");
 				frame.setVisible(false);
 				frame.dispose();
-				new HolidaySearchFrame();
+				new HolidaySearchFrame(userNameTextField.getText());
 				//search, select, book screen call
 			}
 	    }  

@@ -73,10 +73,10 @@ public class LoginSignUpScreen implements ActionListener {
 		}
 		else
 		{
-			JOptionPane.showMessageDialog(null, "New User created successfully!!");
+			//JOptionPane.showMessageDialog(null, "New User created successfully!!");
 			frame.setVisible(false);
 			frame.dispose();
-			new HolidaySearchFrame();
+			new HolidaySearchFrame(userNameTextField.getText());
 			//search, select, book screen call
 		}
     }  

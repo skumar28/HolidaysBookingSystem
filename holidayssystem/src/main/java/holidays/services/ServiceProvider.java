@@ -289,6 +289,7 @@ public class ServiceProvider {
 	{
 		BufferedReader readfromFile=null;
 		BufferedWriter writetoFile = null;
+		int flag=-1;
 		
 		try {						
 			readfromFile = new BufferedReader(new FileReader("src/main/java/holidays/datacontents/file/bookedpackagesinfo.txt"));
@@ -302,7 +303,7 @@ public class ServiceProvider {
 					String parts[] = sLine.split("#");
 					if(parts[0].equals(userName) && parts[2].equals(id.toString()))
 					{
-											
+								flag=1;			
 					}
 					else
 					{
@@ -315,8 +316,10 @@ public class ServiceProvider {
 				writetoFile = new BufferedWriter(new FileWriter("src/main/java/holidays/datacontents/file/bookedpackagesinfo.txt"));
 				writetoFile.write(sData);
 				
-				
-				return true;
+				if (flag==1)
+					return true;
+				else
+					return false;
 			}
 		
 		catch(Exception ex)
