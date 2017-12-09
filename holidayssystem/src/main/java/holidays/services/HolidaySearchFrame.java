@@ -2,19 +2,14 @@ package holidays.services;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,22 +26,20 @@ import holidays.components.Transport;
 import holidays.customer.CustomerInfo;
 
 public class HolidaySearchFrame implements ActionListener {
-	
+
 	String userName;
-	
+
 	JButton bookPackage;
 	JButton makePayment;
 	JButton submitPayment;
 	JButton cancelPacakge;
 	JButton customerSupport;
 	JButton cancelPayment;
-	
-	
-	
+
 	JFrame frame = new JFrame();
 	JPanel topPanel = new JPanel();
 	JPanel botPanel = new JPanel();
-	
+
 	JPanel searchPanel = new JPanel();
 	JPanel resultPanel = new JPanel();
 	ServiceProvider serviceProvider = new ServiceProvider();
@@ -54,17 +47,16 @@ public class HolidaySearchFrame implements ActionListener {
 	JButton searchButton;
 	JTextField searchTextField;
 	JLabel lable = new JLabel();
-	
+
 	JTextField textField_0 = new JTextField();
 	JTextField textField_1 = new JTextField();
 	JTextField textField_2 = new JTextField();
 	JTextField textField_3 = new JTextField();
 	JTextField textField_4 = new JTextField();
-	
 
 	public HolidaySearchFrame(String usrName) {
-		
-		this.userName=usrName;
+
+		this.userName = usrName;
 
 		frame.setBounds(200, 100, 1400, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,27 +79,28 @@ public class HolidaySearchFrame implements ActionListener {
 		searchButton.addActionListener(this);
 
 		cancelPacakge = new JButton("Cancel Package");
-		cancelPacakge.setActionCommand("Cancelthepackage");
+		cancelPacakge.setActionCommand("Cancel Package");
 		cancelPacakge.addActionListener(this);
-		
+
 		customerSupport = new JButton("Customer Support");
 		customerSupport.setActionCommand("support");
-		customerSupport.addActionListener(this);		
-		
+		customerSupport.addActionListener(this);
+
 		botPanel.add(cancelPacakge);
 		botPanel.add(customerSupport);
-		
+
 		JScrollPane scrPane = new JScrollPane(resultPanel);
 		Container contentPane = frame.getContentPane();
 		contentPane.add(topPanel, BorderLayout.NORTH);
 		contentPane.add(scrPane, BorderLayout.CENTER);
 		contentPane.add(botPanel, BorderLayout.SOUTH);
-		
+
 		scrPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		searchPanel.add(searchButton);
 		topPanel.add(applicationName);
 		topPanel.add(searchPanel);
+
 		frame.setVisible(true);
 	}
 
@@ -160,13 +153,16 @@ public class HolidaySearchFrame implements ActionListener {
 
 						for (Flight flight : flightList) {
 							Box flightBox = Box.createVerticalBox();
-							JLabel flightName= new JLabel("Flight Name: "+ flight.getFlightName()+", "+flight.getCarrierName());
+							JLabel flightName = new JLabel(
+									"Flight Name: " + flight.getFlightName() + ", " + flight.getCarrierName());
 							flightBox.add(flightName);
-							JLabel departureAirport= new JLabel("Departure Airport: "+flight.getFromCity()+" Time: "+flight.getStartTime());
+							JLabel departureAirport = new JLabel(
+									"Departure Airport: " + flight.getFromCity() + " Time: " + flight.getStartTime());
 							flightBox.add(departureAirport);
-							JLabel arrivalAirport=new JLabel("Arrival Airport: "+flight.getToCity()+" Time: "+flight.getEndTime());														
+							JLabel arrivalAirport = new JLabel(
+									"Arrival Airport: " + flight.getToCity() + " Time: " + flight.getEndTime());
 							flightBox.add(arrivalAirport);
-							JLabel seprator=new JLabel("                                       ");
+							JLabel seprator = new JLabel("                                       ");
 							flightBox.add(seprator);
 							theBox.add(flightBox);
 						}
@@ -179,18 +175,20 @@ public class HolidaySearchFrame implements ActionListener {
 
 						for (Hotel htl : hotelList) {
 							Box hotelBox = Box.createVerticalBox();
-							JLabel hotelName=new JLabel("Hotel Name: "+htl.getName()+" City: "+htl.getCityName());
+							JLabel hotelName = new JLabel(
+									"Hotel Name: " + htl.getName() + " City: " + htl.getCityName());
 							hotelBox.add(hotelName);
-							JLabel description= new JLabel("Description: "+htl.getDescription());
+							JLabel description = new JLabel("Description: " + htl.getDescription());
 							hotelBox.add(description);
-							JLabel hoteltime= new JLabel("Checkin Time: "+htl.getCheckinTime()+" Checkout Time: "+htl.getCheckoutTime());
+							JLabel hoteltime = new JLabel("Checkin Time: " + htl.getCheckinTime() + " Checkout Time: "
+									+ htl.getCheckoutTime());
 							hotelBox.add(hoteltime);
-							JLabel hotelroom= new JLabel("Room: "+htl.getRoomInfo().getDescription()+" Meal: "+htl.getRoomInfo().getCategory());
+							JLabel hotelroom = new JLabel("Room: " + htl.getRoomInfo().getDescription() + " Meal: "
+									+ htl.getRoomInfo().getCategory());
 							hotelBox.add(hotelroom);
-							JLabel seprator=new JLabel("                                       ");
+							JLabel seprator = new JLabel("                                       ");
 							hotelBox.add(seprator);
 							theBox.add(hotelBox);
-							
 
 						}
 					}
@@ -202,14 +200,15 @@ public class HolidaySearchFrame implements ActionListener {
 						for (Activity act : activityList) {
 
 							Box activityBox = Box.createVerticalBox();
-							JLabel activityName= new JLabel("Activity Name:" +act.getName()+" Duration: "+act.getDuration());
+							JLabel activityName = new JLabel(
+									"Activity Name:" + act.getName() + " Duration: " + act.getDuration());
 							activityBox.add(activityName);
-							JLabel activityDescription=new JLabel("Description: "+act.getDescription());
+							JLabel activityDescription = new JLabel("Description: " + act.getDescription());
 							activityBox.add(activityDescription);
-							JLabel seprator=new JLabel("                                       ");
+							JLabel seprator = new JLabel("                                       ");
 							activityBox.add(seprator);
 							theBox.add(activityBox);
-							
+
 						}
 					}
 					JLabel tDetail = new JLabel("Transport Details");
@@ -218,15 +217,15 @@ public class HolidaySearchFrame implements ActionListener {
 					if (!transportList.isEmpty()) {
 						for (Transport trp : transportList) {
 							Box transportBox = Box.createVerticalBox();
-							
-							JLabel transportName= new JLabel("Transport Name: "+trp.getName());
+
+							JLabel transportName = new JLabel("Transport Name: " + trp.getName());
 							transportBox.add(transportName);
-							JLabel transportDescription=new JLabel("Description: "+ trp.getDescription());
+							JLabel transportDescription = new JLabel("Description: " + trp.getDescription());
 							transportBox.add(transportDescription);
-							JLabel seprator=new JLabel("                                       ");
+							JLabel seprator = new JLabel("                                       ");
 							transportBox.add(seprator);
 							theBox.add(transportBox);
-							
+
 						}
 					}
 					bookPackage = new JButton("Book Package");
@@ -235,7 +234,7 @@ public class HolidaySearchFrame implements ActionListener {
 					theBox.add(bookPackage);
 
 					thePanel.add(theBox);
-					
+
 				}
 
 				serviceProvider.ListPackages(hpList);
@@ -265,11 +264,13 @@ public class HolidaySearchFrame implements ActionListener {
 			Font nameFont1 = new Font("Helvetica", Font.BOLD, 17);
 			msg.setFont(nameFont1);
 			theBox.add(msg);
+			JLabel seprator = new JLabel("                                       ");
+			theBox.add(seprator);
 			JLabel nameLabel = new JLabel("Package Name: " + hp.getName());
 			Font nameFont = new Font("Helvetica", Font.BOLD, 16);
 			nameLabel.setFont(nameFont);
 			theBox.add(nameLabel);
-			
+
 			JLabel descLabel = new JLabel("Description: " + hp.getDescription());
 			theBox.add(descLabel);
 			JLabel type = new JLabel("Type: " + hp.getType());
@@ -288,13 +289,16 @@ public class HolidaySearchFrame implements ActionListener {
 
 				for (Flight flight : flightList) {
 					Box flightBox = Box.createVerticalBox();
-					JLabel flightName= new JLabel("Flight Name: "+ flight.getFlightName()+", "+flight.getCarrierName());
+					JLabel flightName = new JLabel(
+							"Flight Name: " + flight.getFlightName() + ", " + flight.getCarrierName());
 					flightBox.add(flightName);
-					JLabel departureAirport= new JLabel("Departure Airport: "+flight.getFromCity()+" Time: "+flight.getStartTime());
+					JLabel departureAirport = new JLabel(
+							"Departure Airport: " + flight.getFromCity() + " Time: " + flight.getStartTime());
 					flightBox.add(departureAirport);
-					JLabel arrivalAirport=new JLabel("Arrival Airport: "+flight.getToCity()+" Time: "+flight.getEndTime());														
+					JLabel arrivalAirport = new JLabel(
+							"Arrival Airport: " + flight.getToCity() + " Time: " + flight.getEndTime());
 					flightBox.add(arrivalAirport);
-					JLabel seprator=new JLabel("                                       ");
+					seprator = new JLabel("                                       ");
 					flightBox.add(seprator);
 					theBox.add(flightBox);
 
@@ -308,15 +312,17 @@ public class HolidaySearchFrame implements ActionListener {
 
 				for (Hotel htl : hotelList) {
 					Box hotelBox = Box.createVerticalBox();
-					JLabel hotelName=new JLabel("Hotel Name: "+htl.getName()+" City: "+htl.getCityName());
+					JLabel hotelName = new JLabel("Hotel Name: " + htl.getName() + " City: " + htl.getCityName());
 					hotelBox.add(hotelName);
-					JLabel description= new JLabel("Description: "+htl.getDescription());
+					JLabel description = new JLabel("Description: " + htl.getDescription());
 					hotelBox.add(description);
-					JLabel hoteltime= new JLabel("Checkin Time: "+htl.getCheckinTime()+" Checkout Time: "+htl.getCheckoutTime());
+					JLabel hoteltime = new JLabel(
+							"Checkin Time: " + htl.getCheckinTime() + " Checkout Time: " + htl.getCheckoutTime());
 					hotelBox.add(hoteltime);
-					JLabel hotelroom= new JLabel("Room: "+htl.getRoomInfo().getDescription()+" Meal: "+htl.getRoomInfo().getCategory());
+					JLabel hotelroom = new JLabel("Room: " + htl.getRoomInfo().getDescription() + " Meal: "
+							+ htl.getRoomInfo().getCategory());
 					hotelBox.add(hotelroom);
-					JLabel seprator=new JLabel("                                       ");
+					seprator = new JLabel("                                       ");
 					hotelBox.add(seprator);
 					theBox.add(hotelBox);
 
@@ -330,11 +336,12 @@ public class HolidaySearchFrame implements ActionListener {
 				for (Activity act : activityList) {
 
 					Box activityBox = Box.createVerticalBox();
-					JLabel activityName= new JLabel("Activity Name:" +act.getName()+" Duration: "+act.getDuration());
+					JLabel activityName = new JLabel(
+							"Activity Name:" + act.getName() + " Duration: " + act.getDuration());
 					activityBox.add(activityName);
-					JLabel activityDescription=new JLabel("Description: "+act.getDescription());
+					JLabel activityDescription = new JLabel("Description: " + act.getDescription());
 					activityBox.add(activityDescription);
-					JLabel seprator=new JLabel("                                       ");
+					seprator = new JLabel("                                       ");
 					activityBox.add(seprator);
 					theBox.add(activityBox);
 				}
@@ -345,17 +352,19 @@ public class HolidaySearchFrame implements ActionListener {
 			if (!transportList.isEmpty()) {
 				for (Transport trp : transportList) {
 					Box transportBox = Box.createVerticalBox();
-					
-					JLabel transportName= new JLabel("Transport Name: "+trp.getName());
+
+					JLabel transportName = new JLabel("Transport Name: " + trp.getName());
 					transportBox.add(transportName);
-					JLabel transportDescription=new JLabel("Description: "+ trp.getDescription());
+					JLabel transportDescription = new JLabel("Description: " + trp.getDescription());
 					transportBox.add(transportDescription);
-					JLabel seprator=new JLabel("                                       ");
+					seprator = new JLabel("                                       ");
 					transportBox.add(seprator);
 					theBox.add(transportBox);
 				}
 			}
 
+			seprator = new JLabel("                                       ");
+			theBox.add(seprator);
 			Double totalPrice = serviceProvider.getTotalPrice(hp);
 			hp.setTotalPrice(totalPrice);
 
@@ -370,196 +379,177 @@ public class HolidaySearchFrame implements ActionListener {
 			theBox.add(makePayment);
 
 			thePanel.add(theBox);
-			
 
 			resultPanel.add(thePanel);
 			SwingUtilities.updateComponentTreeUI(frame);
 		}
-		
+
 		if (e.getActionCommand().contains("Make Payment")) {
 			System.out.println("Make Payment called" + e.getActionCommand());
 			String packInfo[] = e.getActionCommand().split("#");
 			int packageId = Integer.parseInt(packInfo[1]);
 
 			HolidayPackage hp = serviceProvider.getPackageById(packageId);
-			Box theBoxV = Box.createVerticalBox();			
+			Box theBoxV = Box.createVerticalBox();
 			JPanel tempPanel = new JPanel();
-			
+
+			JLabel msg = new JLabel("Enter the Below Information");
+			Font nameFont1 = new Font("Helvetica", Font.BOLD, 17);
+			msg.setFont(nameFont1);
+			theBoxV.add(msg);
+
+			JLabel seprator = new JLabel("                                       ");
+			theBoxV.add(seprator);
+
 			JLabel lblName = new JLabel("Name");
 			lblName.setBounds(65, 68, 46, 14);
 			tempPanel.add(lblName);
-				
+
 			textField_0.setBounds(128, 65, 150, 20);
 			tempPanel.add(textField_0);
 			textField_0.setColumns(10);
 			theBoxV.add(tempPanel);
-			
-			 tempPanel = new JPanel();
+
+			tempPanel = new JPanel();
 			JLabel lblPhone = new JLabel("Phone");
 			lblPhone.setBounds(65, 68, 46, 14);
 			tempPanel.add(lblPhone);
-						
+
 			textField_1.setBounds(128, 65, 150, 20);
 			tempPanel.add(textField_1);
 			textField_1.setColumns(10);
 			theBoxV.add(tempPanel);
-			
+
 			tempPanel = new JPanel();
 			JLabel lblEmailId = new JLabel("Email Id");
 			lblEmailId.setBounds(65, 115, 46, 14);
-			tempPanel.add(lblEmailId);			
-			
+			tempPanel.add(lblEmailId);
+
 			textField_2.setBounds(128, 112, 150, 20);
 			tempPanel.add(textField_2);
 			textField_2.setColumns(10);
 			theBoxV.add(tempPanel);
-			
+
 			tempPanel = new JPanel();
 			JLabel lblCard = new JLabel("Card Details");
 			lblCard.setBounds(65, 162, 46, 14);
-			tempPanel.add(lblCard);			
-			
+			tempPanel.add(lblCard);
+
 			textField_3.setBounds(128, 112, 150, 20);
 			tempPanel.add(textField_3);
 			textField_3.setColumns(10);
 			theBoxV.add(tempPanel);
-			
+
 			submitPayment = new JButton("Pay");
 			submitPayment.setActionCommand("Submit Payment #" + hp.getId());
 			submitPayment.addActionListener(this);
 			theBoxV.add(submitPayment);
 
+			thePanel.add(theBoxV);
 
-			thePanel.add(theBoxV);			
-			
 			resultPanel.add(thePanel);
 			SwingUtilities.updateComponentTreeUI(frame);
 		}
-		
+
 		if (e.getActionCommand().contains("Submit Payment")) {
 			System.out.println("Submit Payment called" + e.getActionCommand());
 			String packInfo[] = e.getActionCommand().split("#");
 			int packageId = Integer.parseInt(packInfo[1]);
-			
+
 			custInfo = new CustomerInfo();
-			custInfo.setUsername(textField_0.getText());
+			custInfo.setUsername(userName);
 			custInfo.setEmail(textField_2.getText());
 			custInfo.setContactNum(textField_1.getText());
 			custInfo.setCardDetail(textField_3.getText());
-						
+
 			HolidayPackage hp = serviceProvider.getPackageById(packageId);
 			String confirmationMessage = serviceProvider.makePayment(packageId, custInfo);
-			JLabel nameLabel = new JLabel(confirmationMessage + " : " + hp.getName());
+			JLabel nameLabel = new JLabel(confirmationMessage + "ID :" + packageId + " " + hp.getName());
 			Font nameFont = new Font("Helvetica", Font.BOLD, 16);
 			nameLabel.setFont(nameFont);
 			thePanel.add(nameLabel);
-			resultPanel.add(thePanel);			
+			resultPanel.add(thePanel);
 			SwingUtilities.updateComponentTreeUI(frame);
 		}
-		
-		
-		if(e.getActionCommand().contains("Cancelthepackage")) {
+
+		if (e.getActionCommand().contains("Cancel Package")) {
 			System.out.println("Cancel Package called" + e.getActionCommand());
-			
-			
-			
-			
+
 			Box theBox = Box.createVerticalBox();
 			JPanel tempPanl = new JPanel();
-			
+
 			JLabel lblID = new JLabel("Package ID");
 			lblID.setBounds(65, 68, 46, 14);
 			tempPanl.add(lblID);
-				
+
 			textField_4.setBounds(128, 65, 150, 20);
 			textField_4.setColumns(10);
 			tempPanl.add(textField_4);
-			
+
 			theBox.add(tempPanl);
-			
+
 			cancelPayment = new JButton("Cancel Order");
-			cancelPayment.setActionCommand("Cancel Order #" );
+			cancelPayment.setActionCommand("Cancel Order #");
 			cancelPayment.addActionListener(this);
 			theBox.add(cancelPayment);
-			
-			thePanel.add(theBox);			
-			
+
+			thePanel.add(theBox);
+
 			resultPanel.add(thePanel);
 			SwingUtilities.updateComponentTreeUI(frame);
-			
-			
+
 		}
-		
-		if(e.getActionCommand().contains("Cancel Order"))
-		{
+
+		if (e.getActionCommand().contains("Cancel Order")) {
 			JLabel nameLabel;
 			Font nameFont;
 			System.out.println("Cancel Button called" + e.getActionCommand());
 			String idInfo[] = e.getActionCommand().split("#");
-			int packageID=Integer.parseInt(textField_4.getText());
-			
-			ServiceProvider service= new ServiceProvider();
-			boolean check= service.cancelPackage(packageID, this.userName);
-			
-			if(check==true)
-			{
-				 nameLabel = new JLabel("Package successfully cancelled!!");	
-				 nameFont = new Font("Helvetica", Font.BOLD, 16);
-			}
-			else
-			{
-				 nameLabel = new JLabel("Could not find the package! / Failed to delete the package!");	
-				 nameFont = new Font("Helvetica", Font.BOLD, 16);
+			int packageID = Integer.parseInt(textField_4.getText());
+
+			ServiceProvider service = new ServiceProvider();
+			boolean check = service.cancelPackage(packageID, this.userName);
+
+			if (check == true) {
+				nameLabel = new JLabel("Package successfully cancelled!!");
+				nameFont = new Font("Helvetica", Font.BOLD, 16);
+			} else {
+				nameLabel = new JLabel("Could not find the package with given id : " + packageID);
+				nameFont = new Font("Helvetica", Font.BOLD, 16);
 			}
 			nameLabel.setFont(nameFont);
 			thePanel.add(nameLabel);
-			resultPanel.add(thePanel);			
+			resultPanel.add(thePanel);
 			SwingUtilities.updateComponentTreeUI(frame);
-			
+
 		}
-		
-		
-		if(e.getActionCommand().contains("support"))
-		{
-			
+
+		if (e.getActionCommand().contains("support")) {
 			System.out.println("Customer Support called" + e.getActionCommand());
-			
 			Box theBox = Box.createVerticalBox();
+
 			JPanel tempPanel = new JPanel();
-			
-			JLabel lblName = new JLabel("Phone Number: 1234567890 ");
+
+			JLabel lblName = new JLabel("Phone Number: +1 716 563 0152 ");
 			lblName.setBounds(65, 68, 46, 14);
 			tempPanel.add(lblName);
-				
-		/*	textField_0.setBounds(128, 65, 150, 20);
-			tempPanel.add(textField_0);
-			textField_0.setColumns(10);
-			theBox.add(tempPanel);*/
-			
-			 tempPanel = new JPanel();
-			JLabel lblPhone = new JLabel("Address: ABC Boulevard");
+			theBox.add(tempPanel);
+			tempPanel = new JPanel();
+			JLabel lblPhone = new JLabel("Address: 165 Niagara Falls Boulevard, Buffalo NY - 14226");
 			lblPhone.setBounds(65, 68, 46, 14);
 			tempPanel.add(lblPhone);
-						
-			/*textField_1.setBounds(128, 65, 150, 20);
-			tempPanel.add(textField_1);
-			textField_1.setColumns(10);
-			theBox.add(tempPanel);*/
-			
+			theBox.add(tempPanel);
+
 			tempPanel = new JPanel();
-			JLabel lblEmailId = new JLabel("Email Id: abc@xyz.com");
+			JLabel lblEmailId = new JLabel("Email Id: skumar28@buffalu.edu, achopra6@buffalo.edu");
 			lblEmailId.setBounds(65, 115, 46, 14);
-			tempPanel.add(lblEmailId);			
-			
-		/*	textField_2.setBounds(128, 112, 150, 20);
-			tempPanel.add(textField_2);
-			textField_2.setColumns(10);
-			theBox.add(tempPanel);*/
+			tempPanel.add(lblEmailId);
+			theBox.add(tempPanel);
 			thePanel.add(theBox);
-			resultPanel.add(thePanel);			
+			resultPanel.add(thePanel);
+
 			SwingUtilities.updateComponentTreeUI(frame);
-			
-			
+
 		}
 	}
 
